@@ -3,7 +3,7 @@ import {
   About,
   Blog,
   BlogPost,
-  Contact,
+  Contacts,
   ErrorPage,
   Home,
   Pricing,
@@ -28,8 +28,8 @@ export default [
     element: <Services />,
   },
   {
-    path: COMMON_ROUTES.CONTACT,
-    element: <Contact />,
+    path: COMMON_ROUTES.CONTACTS,
+    element: <Contacts />,
   },
   {
     path: COMMON_ROUTES.BLOG,

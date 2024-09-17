@@ -3,7 +3,7 @@ export enum COMMON_ROUTES {
   PRICING = "pricing",
   ABOUT = "about",
   SERVICES = "services",
-  CONTACT = "contact",
+  CONTACTS = "contacts",
   BLOG = "blog",
   BLOG_POST = "blog/:id",
   NOT_FOUND = "404",
