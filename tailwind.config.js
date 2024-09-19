@@ -33,7 +33,7 @@ export default {
 
     extend: {
       fontFamily: {
-        sans: ["Roboto", "sans-serif"],
+        sans: ["Montserrat", "sans-serif"],
       },
     },
   },

@@ -5,15 +5,19 @@ import { COMMON_ROUTES_NAME } from "../../../constants/constants";
 
 const BurgerMenu: FC = () => {
   return (
-    <DisclosurePanel className="sm:hidden">
+    <DisclosurePanel className="sm:hidden bg-slate-600">
       <div className="space-y-1 px-2 pb-3 pt-2">
         {COMMON_ROUTES_NAME.map((item) => (
-          <NavLink to={item.to} key={item.name}>
-            <DisclosureButton
-              className={
-                "block rounded-md px-3 py-2 text-base font-medium text-primary"
-              }
-            >
+          <NavLink
+            to={item.to}
+            key={item.name}
+            className={({ isActive }) =>
+              isActive
+                ? "block rounded-md px-3 py-2 text-primary "
+                : "block rounded-md px-3 py-2 text-white"
+            }
+          >
+            <DisclosureButton className="font-semibold uppercase">
               {item.name}
             </DisclosureButton>
           </NavLink>
