@@ -6,6 +6,10 @@ import { COMMON_ROUTES_NAME } from "../../../constants/constants";
 const MenuDesctop: FC = () => {
   const [showSubmenu, setShowSubmenu] = useState<boolean>(false);
 
+  const handleShowSubmenu = () => {
+    setShowSubmenu(!showSubmenu);
+  };
+
   return (
     <div className="hidden sm:ml-5 lg:ml-8 sm:block">
       <div className="flex space-x-4">
@@ -18,7 +22,7 @@ const MenuDesctop: FC = () => {
                   ? "text-primary px-2 py-2 lg:text-base sm:text-sm  font-semibold uppercase border-primary border-b-2 border-solid"
                   : "text-black/70 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase hover:border-primary hover:border-b-2 hover:border-solid hover:text-primary"
               }
-              onClick={() => item.submenu && setShowSubmenu(!showSubmenu)}
+              onClick={handleShowSubmenu}
             >
               {item.name}
             </NavLink>

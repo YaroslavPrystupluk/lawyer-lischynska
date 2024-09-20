@@ -17,9 +17,11 @@ const BurgerMenu: FC = () => {
                   ? "block rounded-md px-3 py-2 text-primary"
                   : "block rounded-md px-3 py-2 text-white"
               }
-              onClick={() => item.submenu && setShowSubmenu(!showSubmenu)}
             >
-              <DisclosureButton className="font-semibold uppercase">
+              <DisclosureButton
+                onClick={() => item.submenu && setShowSubmenu(!showSubmenu)}
+                className="font-semibold uppercase"
+              >
                 {item.name}
               </DisclosureButton>
             </NavLink>
