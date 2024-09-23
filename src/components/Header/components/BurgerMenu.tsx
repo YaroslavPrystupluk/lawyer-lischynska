@@ -5,6 +5,10 @@ import { COMMON_ROUTES_NAME } from "../../../constants/constants";
 
 const BurgerMenu: FC = () => {
   const [showSubmenu, setShowSubmenu] = useState<boolean>(false);
+  const handleShowSubmenu = () => {
+    setShowSubmenu((prev) => !prev);
+  };
+
   return (
     <DisclosurePanel className="sm:hidden bg-slate-600">
       <div className="space-y-1 px-2 pb-3 pt-2">
@@ -19,7 +23,7 @@ const BurgerMenu: FC = () => {
               }
             >
               <DisclosureButton
-                onClick={() => item.submenu && setShowSubmenu(!showSubmenu)}
+                onClick={() => item.submenu && handleShowSubmenu()}
                 className="font-semibold uppercase"
               >
                 {item.name}

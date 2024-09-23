@@ -1,4 +1,8 @@
-export const COMMON_ROUTES_NAME = [
+export const COMMON_ROUTES_NAME: {
+  name: string;
+  to: string;
+  submenu?: { name: string; to: string }[];
+}[] = [
   { name: "Головна", to: "/" },
   { name: "Вартість", to: "/pricing" },
   { name: "Про себе", to: "/about" },
