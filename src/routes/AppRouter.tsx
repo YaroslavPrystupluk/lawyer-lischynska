@@ -3,7 +3,7 @@ import commonRouter from "./common.router";
 import Layout from "../Layout/Layout";
 import { ROLE } from "../types/types";
 import adminRouter from "./admin.router";
-import { ErrorPag } from "../pages/common";
+import { ErrorPage } from "../pages/common";
 
 const getRouterByRole = (role: ROLE) => {
   switch (role) {
