@@ -1,12 +1,13 @@
 export const COMMON_ROUTES_NAME: {
+  id: number;
   name: string;
   to: string;
 }[] = [
-  { name: "Головна", to: "/" },
-  { name: "Вартість", to: "/pricing" },
-  { name: "Про себе", to: "/about" },
-  { name: "Контакти", to: "/contacts" },
-  { name: "Блог", to: "/blog" },
+  { id: 1, name: "Вартість", to: "/pricing" },
+  { id: 2, name: "Головна", to: "/" },
+  { id: 3, name: "Про себе", to: "/about" },
+  { id: 4, name: "Контакти", to: "/contacts" },
+  { id: 5, name: "Блог", to: "/blog" },
 ];
 
 export const COMMON_ROUTES_NAME_SUBMENU: {

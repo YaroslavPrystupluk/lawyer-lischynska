@@ -5,6 +5,7 @@ import BurgerMenu from "./components/BurgerMenu";
 import MenuDesctop from "./components/MenuDesctop";
 import MenuAdmin from "./components/MenuAdmin";
 import Logo from "./components/Logo";
+import { ROLE } from "../../../../types/types";
 
 const Navbar: FC = () => {
   return (
@@ -13,9 +14,9 @@ const Navbar: FC = () => {
         <div className="flex flex-1 items-center justify-center sm:justify-start">
           <Logo />
           <MenuDesctop />
+          <BurgerMenu />
         </div>
-        <MenuAdmin />
-        <BurgerMenu />
+        {ROLE.ADMIN && <MenuAdmin />}
       </div>
     </Disclosure>
   );

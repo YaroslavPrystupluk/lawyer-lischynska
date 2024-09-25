@@ -54,7 +54,7 @@ const BurgerMenu: FC = () => {
                 <div className="space-y-2 py-6">
                   {COMMON_ROUTES_NAME.map((item) => (
                     <NavLink
-                      key={item.name}
+                      key={item.id}
                       to={item.to}
                       className={({ isActive }) =>
                         isActive
@@ -71,7 +71,7 @@ const BurgerMenu: FC = () => {
                       {COMMON_ROUTES_NAME_SUBMENU[0].name}
                       <IoIosArrowDown
                         aria-hidden="true"
-                        className="h-5 w-5 flex-none group-data-[open]:rotate-180"
+                        className="h-5 w-5 mr-4 flex-none group-data-[open]:rotate-180"
                       />
                     </DisclosureButton>
 

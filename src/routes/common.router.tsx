@@ -4,7 +4,6 @@ import {
   Blog,
   BlogPost,
   Contacts,
-  ErrorPage,
   Home,
   Pricing,
   ServicesConsultations,
@@ -48,9 +47,5 @@ export default [
   {
     path: COMMON_ROUTES.BLOG_POST,
     element: <BlogPost />,
-  },
-  {
-    path: COMMON_ROUTES.NOT_FOUND,
-    element: <ErrorPage />,
   },
 ];

@@ -18,7 +18,7 @@ const MenuDesctop: FC = () => {
     <PopoverGroup className="hidden sm:ml-5 lg:ml-8 sm:flex sm:space-x-4">
       <div className="flex space-x-4">
         {COMMON_ROUTES_NAME.map((item) => (
-          <div key={item.name}>
+          <div key={item.id}>
             <NavLink
               to={item.to}
               className={({ isActive }) =>
