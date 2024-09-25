@@ -7,7 +7,9 @@ import {
   ErrorPage,
   Home,
   Pricing,
-  Services,
+  ServicesConsultations,
+  ServicesDocumentation,
+  ServicesSupport,
 } from "../pages/common";
 
 export default [
@@ -24,8 +26,16 @@ export default [
     element: <Pricing />,
   },
   {
-    path: COMMON_ROUTES.SERVICES,
-    element: <Services />,
+    path: COMMON_ROUTES.SERVICES_CONSULTATIONS,
+    element: <ServicesConsultations />,
+  },
+  {
+    path: COMMON_ROUTES.SERVICES_DOCUMENTATION,
+    element: <ServicesDocumentation />,
+  },
+  {
+    path: COMMON_ROUTES.SERVICES_SUPPORT,
+    element: <ServicesSupport />,
   },
   {
     path: COMMON_ROUTES.CONTACTS,

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-import { COMMON_ROUTES } from "../../../routes/routes.name";
+import { COMMON_ROUTES } from "../../../../../routes/routes.name";
 import { GoLaw } from "react-icons/go";
 
 const Logo: FC = () => {

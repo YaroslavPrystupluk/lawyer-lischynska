@@ -6,3 +6,6 @@ export { default as ErrorPage } from "./ErrorPage";
 export { default as Home } from "./Home";
 export { default as Pricing } from "./Pricing";
 export { default as Services } from "./Services";
+export { default as ServicesConsultations } from "./Consultations";
+export { default as ServicesDocumentation } from "./Documentation";
+export { default as ServicesSupport } from "./Support";
