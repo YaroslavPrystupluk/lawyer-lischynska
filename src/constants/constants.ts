@@ -3,8 +3,8 @@ export const COMMON_ROUTES_NAME: {
   name: string;
   to: string;
 }[] = [
-  { id: 1, name: "Вартість", to: "/pricing" },
-  { id: 2, name: "Головна", to: "/" },
+  { id: 1, name: "Головна", to: "/" },
+  { id: 2, name: "Вартість", to: "/pricing" },
   { id: 3, name: "Про себе", to: "/about" },
   { id: 4, name: "Контакти", to: "/contacts" },
   { id: 5, name: "Блог", to: "/blog" },
