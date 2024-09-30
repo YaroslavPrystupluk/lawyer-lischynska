@@ -10,8 +10,8 @@ import { ROLE } from "../../../../types/types";
 const Navbar: FC = () => {
   return (
     <Disclosure as="nav">
-      <div className="mx-auto max-w-8xl pt-4 sm:px-4 lg:px-8 relative flex items-center justify-between">
-        <div className="flex flex-1 items-center justify-center sm:justify-start">
+      <div className="mx-auto max-w-8xl px-2 sm:px-4 lg:px-8 py-4 relative flex items-center justify-between">
+        <div className="flex flex-1 items-center justify-center md:justify-start">
           <Logo />
           <MenuDesctop />
           <BurgerMenu />
