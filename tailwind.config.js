@@ -27,8 +27,8 @@ export default {
       cyan,
       transparent,
       red,
-      primary: "#D0AC83",
-      secondary: "#DBDDE9",
+      primary: "#538EA6",
+      secondary: "#C7C9D8",
     },
 
     extend: {

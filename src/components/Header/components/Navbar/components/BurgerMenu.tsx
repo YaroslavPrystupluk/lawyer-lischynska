@@ -20,7 +20,7 @@ const BurgerMenu: FC = () => {
 
   return (
     <>
-      <div className="absolute inset-y-0 left-3 flex items-center sm:hidden">
+      <div className="absolute inset-y-0 left-3 flex items-center md:hidden">
         <button
           type="button"
           onClick={() => setMobileMenuOpen((prev) => !prev)}
