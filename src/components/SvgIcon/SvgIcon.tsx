@@ -1,3 +1,4 @@
+import { FC } from "react";
 import iconsSprite from "/icons/icons.svg";
 interface SvgIconProps {
   icon: string;
@@ -5,8 +6,15 @@ interface SvgIconProps {
   size?: number;
 }
 
-export const SvgIcon = ({ icon, className = "", size = 50 }: SvgIconProps) => (
-  <svg className={className} width={size} height={size}>
-    <use href={`${iconsSprite}#${icon}`} />
-  </svg>
-);
+export const SvgIcon: FC<SvgIconProps> = ({
+  icon,
+  className = "",
+  size,
+  ...props
+}) => {
+  return (
+    <svg className={className} width={size} height={size} {...props}>
+      <use href={`${iconsSprite}#${icon}`} />
+    </svg>
+  );
+};
