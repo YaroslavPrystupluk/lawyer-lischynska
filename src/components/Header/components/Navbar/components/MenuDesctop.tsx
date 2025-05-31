@@ -15,8 +15,8 @@ import {
 
 const MenuDesctop: FC = () => {
   return (
-    <PopoverGroup className="hidden sm:ml-2 lg:ml-8 md:flex sm:space-x-4">
-      <div className="flex space-x-4">
+    <PopoverGroup className="hidden md:flex">
+      <div className="flex space-x-2">
         {COMMON_ROUTES_NAME.map((item) => (
           <div key={item.id}>
             <NavLink
