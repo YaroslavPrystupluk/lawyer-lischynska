@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { COMMON_ROUTES } from "../../../../../routes/routes.name";
 
-import logoFull from "../../../../../assets/image/logo.webp";
+import logoFull from "/image/logo.webp";
 
 const Logo: FC = () => {
   return (

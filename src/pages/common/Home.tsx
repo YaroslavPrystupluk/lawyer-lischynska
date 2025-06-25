@@ -1,10 +1,11 @@
 import { FC } from "react";
+import { CardMyexpertise } from "../../components";
 
 const Home: FC = () => {
   return (
-    <div>
-      <p>Home</p>
-    </div>
+    <>
+      <CardMyexpertise />
+    </>
   );
 };
 

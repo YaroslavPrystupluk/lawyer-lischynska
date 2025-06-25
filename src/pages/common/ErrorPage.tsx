@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useNavigate, useRouteError } from "react-router-dom";
 
-import imageErorr from "../../assets/image/404-pages.webp";
+import imageErorr from "/image/404-pages.webp";
 
 const ErrorPage: FC = () => {
   useRouteError();
