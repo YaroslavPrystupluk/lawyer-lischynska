@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useRef, useState} from 'react';
 import { Outlet } from "react-router-dom";
 import { Header } from "../components";
 import Footer from "../components/Footer/Footer";
@@ -8,14 +8,19 @@ import FeedBackModal from '../components/Modal/ContentModal/FeedBackModal.tsx';
 
 const Layout: FC = () => {
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+    const form = useRef<HTMLFormElement>(null);
     
     const handleOpenModal = () => {
         setModalIsOpen(true)
     }
+    
     const handleCloseModal = () => {
+        if (form.current) {
+            form.current.reset();
+        }
         setModalIsOpen(false)
     }
-    console.log('layout', modalIsOpen);
+
   return (
     <>
       <Header />
@@ -24,8 +29,11 @@ const Layout: FC = () => {
       </div>
       <ButtonFloatingAction handleOpenModal={handleOpenModal} />
       <Footer />
-        <Modal onClose={handleCloseModal} open={modalIsOpen}>
-            <FeedBackModal/>
+        <Modal onClose={handleCloseModal} open={modalIsOpen} >
+            <FeedBackModal
+                ref={form}
+                handleCloseModal={handleCloseModal}
+            />
         </Modal>
       </>
   );

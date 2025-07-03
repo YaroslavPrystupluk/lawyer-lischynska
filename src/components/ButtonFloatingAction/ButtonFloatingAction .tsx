@@ -37,7 +37,7 @@ const ButtonFloatingAction: FC<Props> = ({handleOpenModal}) => {
       <button
           onClick={handleOpenModal}
         title="Contact Sale"
-        className="fixed z-90 bottom-10 right-8 bg-primary w-16 h-16 sm:w-20 sm:h-20  rounded-full drop-shadow-lg flex justify-center items-center  hover:bg-primary/50 hover:drop-shadow-2xl hover:animate-bounce duration-300 cursor-pointer"
+        className="outline-none fixed z-90 bottom-10 right-8 bg-primary w-16 h-16 sm:w-20 sm:h-20  rounded-full drop-shadow-lg flex justify-center items-center  hover:bg-primary/50 hover:drop-shadow-2xl hover:animate-bounce duration-300 cursor-pointer"
       >
           {
               showText
