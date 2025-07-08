@@ -8,9 +8,9 @@ const Header: FC = () => {
 		<header className="bg-gradient-to-r from-secondary/60 to-secondary">
 			{/*<header className="bg-[url('/image/back-header.png')] bg-cover bg-no-repeat h-[500px] md:h-[700px] lg:h-[100vh] ">*/}
 			<Navbar/>
-			<div className="flex flex-col md:flex-row items-center px-12 justify-center">
+			<div className="flex flex-col md:flex-row items-center md:items-start px-12 justify-center">
 				<section
-					className="text-primary uppercase text-xl sm:text-2xl md:text-4xl xl:text-6xl font-bold">
+					className="text-primary uppercase text-xl sm:text-2xl md:text-4xl xl:text-6xl font-bold justify-self-start py-16">
 					<blockquote className="relative px-8 py-8 ">
 						<div
 							className="text-xl sm:text-2xl md:text-4xl xl:text-6xl font-bold text-left">&ldquo;</div>
