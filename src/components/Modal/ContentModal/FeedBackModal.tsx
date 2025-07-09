@@ -1,23 +1,25 @@
-import {FC, FormEvent, useRef} from 'react';
+import {FC, FormEvent, RefObject} from 'react';
 import emailjs from '@emailjs/browser';
+import {IoCloseOutline} from 'react-icons/io5';
 
-import TitleChapter from '../../components/TitleChapter/TitleChapter.tsx';
+interface feedBackProps {
+	handleCloseModal: () => void;
+	ref: RefObject<HTMLFormElement>
+}
 
-const Contacts: FC = () => {
-	
-	const form = useRef<HTMLFormElement>(null);
+const FeedBackModal: FC<feedBackProps> = ({handleCloseModal, ref}) => {
 	const sendEmail = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (!form.current) return;
+		if (!ref.current) return;
 		
 		emailjs
-			.sendForm(import.meta.env.VITE_SERVICE_ID, import.meta.env.VITE_TEMPLATE_ID, form.current, {
+			.sendForm(import.meta.env.VITE_SERVICE_ID, import.meta.env.VITE_TEMPLATE_ID, ref.current, {
 				publicKey: import.meta.env.VITE_PUBLIC_KEY
 			})
 			.then(
 				() => {
-					if (form.current) {
-						form.current.reset();
+					if (ref.current) {
+						ref.current.reset();
 					}
 				},
 				(error) => {
@@ -27,13 +29,15 @@ const Contacts: FC = () => {
 	};
 	
 	return (
-		<>
-		<div className="relative my-8 sm:my-16">
-			<TitleChapter>Контакти</TitleChapter>
-		</div>
-		
-		<section className="text-gray-900 body-font relative">
-			<div className="container px-5 pb-24 mx-auto flex sm:flex-nowrap flex-wrap">
+		<section className="text-gray-900">
+			<button
+				onClick={handleCloseModal}
+				type="button"
+				className="absolute top-4 right-4 rounded-md p-2 text-primary hover:text-primary/30 outline-none ring-2 ring-inset ring-primary hover:ring-primary/30 m-4 "
+			>
+				<IoCloseOutline aria-hidden="true" className="h-6 w-6"/>
+			</button>
+			<div className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
 				<div
 					className="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
 					<iframe
@@ -60,7 +64,7 @@ const Contacts: FC = () => {
 					</div>
 				</div>
 				<form className="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:py-8 mt-8 md:mt-0"
-				      ref={form} onSubmit={sendEmail}>
+				      ref={ref} onSubmit={sendEmail}>
 					<h2 className="text-primary text-3xl mb-1 font-medium title-font text-center">контактна
 						форма</h2>
 					<p className="leading-relaxed mb-5 text-gray-600">Заповніть форму, щоб замовити контактна
@@ -93,16 +97,10 @@ const Contacts: FC = () => {
 					        className="text-cyan-50 bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary/80 rounded text-lg">Замовити
 						консультацію
 					</button>
-					<p className="text-xs text-gray-500 mt-3">*натискаючи «Відправити», Ви погоджуєтесь з політикою
-						конфіденційності.</p>
+					<p className="text-xs text-gray-500 mt-3">*натискаючи «Замовити консультацію», Ви погоджуєтесь з політикою конфіденційності.</p>
 				</form>
-				{
-				
-				}
 			</div>
 		</section>
-		</>
 	);
 };
-
-export default Contacts;
+export default FeedBackModal;

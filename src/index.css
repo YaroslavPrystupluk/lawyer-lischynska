@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.modal::backdrop {
+    @apply fixed top-0 left-0 z-[1] w-full h-screen bg-black/60;
+}

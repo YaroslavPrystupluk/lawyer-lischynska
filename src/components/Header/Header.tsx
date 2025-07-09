@@ -1,35 +1,33 @@
-import { FC } from "react";
+import {FC} from 'react';
 
-import Navbar from "./components/Navbar/Navbar";
-// import lawyer from "/image/lawyer.webp";
+import Navbar from './components/Navbar/Navbar';
+import lawyer from '/image/lawyer.webp';
 
 const Header: FC = () => {
-  return (
-    // <header className="bg-gradient-to-r from-secondary/60 to-secondary">
-    <header className="bg-[url(/image/back-header.png)] bg-cover bg-no-repeat">
-      <Navbar />
-      {/* <div className="grid grid-flow-row sm:grid-flow-col"> */}
-      {/* <div className="flex flex-col items-center sm:pl-12 justify-center flex-shrink-"> */}
-      <p className="relative text-4xl sm:text-5xl lg:text-6xl font-bold text-primary uppercase">
-        <span className="before:content-['\201c'] before:absolute before:top-[-15px] sm:before:top-[-25px] before:left-[-30px] before:text-primary before:text-4xl sm:before:text-5xl lg:before:text-6xl">
-          Репутація,
-        </span>
-      </p>
-      <p className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary uppercase">
-        повага,
-      </p>
-      <p className="relative text-4xl sm:text-5xl lg:text-6xl font-bold text-primary uppercase">
-        <span className="after:content-['\201d'] after:absolute after:bottom-[-35px] sm:after:bottom-[-50px] after:right-[-30px] after:text-primary after:text-4xl sm:after:text-5xl lg:after:text-6xl">
-          результат
-        </span>
-      </p>
-      {/* </div> */}
-      <div className="h-[470px] max-w-[400px] sm:h-[600px] sm:max-w-[500px] lg:h-[700px] lg:max-w-[600px] overflow-hidden justify-self-center">
-        {/* <img className="max-w-full" src={lawyer} alt="lawyer photo" /> */}
-      </div>
-      {/* </div> */}
-    </header>
-  );
+	return (
+		<header className="bg-gradient-to-r from-secondary/60 to-secondary h-[100vh] overflow-hidden" >
+			{/*<header className="bg-[url('/image/back-header.png')] bg-cover bg-no-repeat h-[500px] md:h-[700px] lg:h-[100vh] ">*/}
+			<Navbar/>
+			<div className="flex flex-col md:flex-row items-center md:items-start md:px-12 justify-center">
+				<section
+					className="text-primary uppercase text-xl md:text-4xl xl:text-6xl font-bold justify-self-start py-3 md:py-16">
+					<blockquote className="relative px-8 md:py-8 ">
+						<div
+							className="text-left">&ldquo;</div>
+						<div className="inline-block text-left">
+							<cite className="block">Працюю чесно, сумлінно та в інтересах кожного клієнта</cite>
+						</div>
+						<div
+							className="text-right">&rdquo;</div>
+					</blockquote>
+				</section>
+				<div
+					className="h-[470px] max-w-[400px] sm:max-w-[500px] lg:max-w-[600px] ">
+					<img className="object-cover" src={lawyer} alt="lawyer photo"/>
+				</div>
+			</div>
+		</header>
+	);
 };
 
 export default Header;
