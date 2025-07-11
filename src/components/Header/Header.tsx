@@ -1,7 +1,7 @@
 import {FC} from 'react';
 
 import Navbar from './components/Navbar/Navbar';
-import lawyer from '/image/lawyer.webp';
+import lawyer from '/image/111.png';
 
 const Header: FC = () => {
 	return (
