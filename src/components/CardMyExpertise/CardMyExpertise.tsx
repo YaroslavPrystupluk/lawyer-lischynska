@@ -3,7 +3,7 @@ import { FC } from "react";
 import TitleChapter from "../TitleChapter/TitleChapter";
 import Card from "../Card/Card";
 
-const CardMyexpertise: FC = () => {
+const CardMyExpertise: FC = () => {
   return (
     <>
       <div className="relative my-8 sm:my-16">
@@ -14,4 +14,4 @@ const CardMyexpertise: FC = () => {
   );
 };
 
-export default CardMyexpertise;
+export default CardMyExpertise;
