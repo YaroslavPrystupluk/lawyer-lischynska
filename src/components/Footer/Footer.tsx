@@ -1,95 +1,74 @@
 import logoFull from "/image/logo.webp";
+import {
+  COMMON_ROUTES_NAME,
+  COMMON_ROUTES_NAME_SUBMENU,
+} from "../../constants/constants.ts";
+import { NavLink } from "react-router-dom";
 
 const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
     <footer className="bg-primary">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
-            <a href="https://flowbite.com/" className="flex items-center">
+            <NavLink to="/" className="flex items-center">
               <img
                 src={logoFull}
                 alt="logo"
                 className="block w-[200px] invert sepia brightness-200"
               />
-            </a>
+            </NavLink>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Resources
-              </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="https://flowbite.com/" className="hover:underline">
-                    Flowbite
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://tailwindcss.com/"
-                    className="hover:underline"
+            <ul className="text-slate-700 dark:text-slate-600 font-medium">
+              {COMMON_ROUTES_NAME.map((item) => (
+                <li className="mb-4" key={item.id}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-slate-100 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase border-primary border-b-2 border-solid"
+                        : "text-black/70 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase hover:border-primary hover:border-b-2 hover:border-solid hover:text-slate-100"
+                    }
                   >
-                    Tailwind CSS
-                  </a>
+                    {item.name}
+                  </NavLink>
                 </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Follow us
-              </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a
-                    href="https://github.com/themesberg/flowbite"
-                    className="hover:underline "
+              ))}
+            </ul>
+            <ul className="text-slate-700 dark:text-slate-600 font-medium">
+              {COMMON_ROUTES_NAME_SUBMENU[0]?.submenu.map((item) => (
+                <li className="mb-4" key={item.id}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-slate-100 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase border-primary border-b-2 border-solid"
+                        : "text-black/70 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase hover:border-primary hover:border-b-2 hover:border-solid hover:text-slate-100"
+                    }
                   >
-                    Github
-                  </a>
+                    {item.name}
+                  </NavLink>
                 </li>
-                <li>
-                  <a
-                    href="https://discord.gg/4eeurUVvTy"
-                    className="hover:underline"
-                  >
-                    Discord
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                Legal
-              </h2>
-              <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                <li className="mb-4">
-                  <a href="#" className="hover:underline">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:underline">
-                    Terms &amp; Conditions
-                  </a>
-                </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
           </div>
         </div>
         <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-            © 2023{" "}
+          <span className="text-sm text-slate-700 sm:text-center dark:text-slate-600">
+            © {year}{" "}
             <a href="https://flowbite.com/" className="hover:underline">
-              Flowbite™
+              Адвокат Тетяна Ліщинська™
             </a>
-            . All Rights Reserved.
+            . Всі права захищені.
           </span>
           <div className="flex mt-4 sm:justify-center sm:mt-0">
             <a
               href="#"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white"
+              className="text-slate-700 hover:text-slate-900 dark:hover:text-white"
             >
               <svg
                 className="w-4 h-4"
@@ -108,7 +87,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-slate-700 hover:text-slate-900 dark:hover:text-white ms-5"
             >
               <svg
                 className="w-4 h-4"
@@ -123,7 +102,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-slate-700 hover:text-slate-900 dark:hover:text-white ms-5"
             >
               <svg
                 className="w-4 h-4"
@@ -142,7 +121,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-slate-700 hover:text-slate-900 dark:hover:text-white ms-5"
             >
               <svg
                 className="w-4 h-4"
@@ -161,7 +140,7 @@ const Footer = () => {
             </a>
             <a
               href="#"
-              className="text-gray-500 hover:text-gray-900 dark:hover:text-white ms-5"
+              className="text-slate-700 hover:text-slate-900 dark:hover:text-white ms-5"
             >
               <svg
                 className="w-4 h-4"
