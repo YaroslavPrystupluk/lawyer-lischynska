@@ -48,7 +48,7 @@ const Pricing: FC = () => {
         {error && <p className="text-center text-red-600 py-4">{error}</p>}
 
         {!loading && !error && (
-          <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <table className="w-full text-sm text-left rtl:text-right text-slate-500 dark:text-gray-400">
             <thead className="text-xs uppercase bg-primary text-gray-700">
               <tr>
                 <th scope="col" className="px-6 py-3">
@@ -63,7 +63,7 @@ const Pricing: FC = () => {
               {prices.map(({ id, name, price }) => (
                 <tr
                   key={id}
-                  className="odd:bg-white even:bg-gray-50 border-b border-gray-200 text-primary"
+                  className="odd:bg-white even:bg-slate-100 border-b border-prymary text-primary"
                 >
                   <th
                     scope="row"

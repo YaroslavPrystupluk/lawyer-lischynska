@@ -8,7 +8,7 @@ const About: FC = () => {
         <TitleChapter>Про себе</TitleChapter>
       </div>
       <section className="mx-auto">
-        <div className="space-y-6 text-gray-700 text-justify text-base sm:text-lg leading-relaxed">
+        <div className="space-y-6 text-slate-700 text-justify text-base sm:text-lg leading-relaxed">
           <p>
             Вітаю, мене звати <strong>Тетяна Ліщинська</strong>. Я адвокат з
             юридичним досвідом роботи вже <strong>14 років</strong>.
