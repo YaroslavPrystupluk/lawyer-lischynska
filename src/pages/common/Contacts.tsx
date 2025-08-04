@@ -36,7 +36,7 @@ const Contacts: FC = () => {
         <TitleChapter>Контакти</TitleChapter>
       </div>
 
-      <section className="text-gray-900 body-font relative">
+      <section className="text-slate-900 body-font relative">
         <div className="container px-5 pb-24 mx-auto flex sm:flex-nowrap flex-wrap">
           <div className="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
             <iframe
@@ -65,7 +65,7 @@ const Contacts: FC = () => {
                 <h2 className="title-font font-semibold text-primary tracking-widest text-xs">
                   EMAIL
                 </h2>
-                <a className="text-indigo-500 leading-relaxed">
+                <a className="text-slate-600 leading-relaxed">
                   tanya_lischynska@ukr.net
                 </a>
                 <h2 className="title-font font-semibold text-primary tracking-widest text-xs mt-4">
@@ -84,12 +84,15 @@ const Contacts: FC = () => {
             <h2 className="text-primary text-3xl mb-1 font-medium title-font text-center">
               контактна форма
             </h2>
-            <p className="leading-relaxed mb-5 text-gray-600">
+            <p className="leading-relaxed mb-5 text-slate-600">
               Заповніть форму, щоб замовити контактна форма
             </p>
 
             <div className="relative mb-4">
-              <label htmlFor="name" className="leading-7 text-sm text-gray-600">
+              <label
+                htmlFor="name"
+                className="leading-7 text-sm text-slate-600"
+              >
                 Вкажіть ім'я і прізвище
               </label>
               <input
@@ -97,13 +100,13 @@ const Contacts: FC = () => {
                 id="name"
                 name="name"
                 required
-                className="w-full bg-white rounded border border-primary focus:ring-1 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full bg-white rounded border border-primary focus:ring-1 focus:ring-primary text-base outline-none text-slate-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
             <div className="relative mb-4">
               <label
                 htmlFor="email"
-                className="leading-7 text-sm text-gray-600"
+                className="leading-7 text-sm text-slate-600"
               >
                 Email
               </label>
@@ -112,14 +115,14 @@ const Contacts: FC = () => {
                 id="email"
                 name="email"
                 required
-                className="w-full bg-white rounded border border-primary focus:ring-1 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full bg-white rounded border border-primary focus:ring-1 focus:ring-primary text-base outline-none text-slate-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
 
             <div className="relative mb-4">
               <label
                 htmlFor="phone"
-                className="leading-7 text-sm text-gray-600"
+                className="leading-7 text-sm text-slate-600"
               >
                 Ваш номер телефону
               </label>
@@ -128,13 +131,13 @@ const Contacts: FC = () => {
                 id="phone"
                 name="phone"
                 required
-                className="w-full bg-white rounded border border-primary focus:ring-1 focus:ring-primary text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                className="w-full bg-white rounded border border-primary focus:ring-1 focus:ring-primary text-base outline-none text-slate-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
               />
             </div>
             <div className="relative mb-4">
               <label
                 htmlFor="message"
-                className="leading-7 text-sm text-gray-600"
+                className="leading-7 text-sm text-slate-600"
               >
                 Ваше питання
               </label>
@@ -142,7 +145,7 @@ const Contacts: FC = () => {
                 id="message"
                 name="message"
                 required
-                className="w-full bg-white rounded border border-primary focus:ring-1 focus:ring-primary h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
+                className="w-full bg-white rounded border border-primary focus:ring-1 focus:ring-primary h-32 text-base outline-none text-slate-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"
               ></textarea>
             </div>
             <button
@@ -151,7 +154,7 @@ const Contacts: FC = () => {
             >
               Замовити консультацію
             </button>
-            <p className="text-xs text-gray-500 mt-3">
+            <p className="text-xs text-slate-500 mt-3">
               *натискаючи «Відправити», Ви погоджуєтесь з політикою
               конфіденційності.
             </p>
