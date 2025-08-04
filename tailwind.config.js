@@ -1,6 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 
-import { black, white, transparent, slate, cyan } from "tailwindcss/colors";
+import {
+  black,
+  white,
+  transparent,
+  slate,
+  cyan,
+  red,
+} from "tailwindcss/colors";
 
 export default {
   darkMode: "class",
@@ -19,13 +26,15 @@ export default {
       slate,
       cyan,
       transparent,
-      primary: "#D0AC83",
-      secondary: "#DBDDE9",
+      red,
+      // primary: "#D0AC83",
+      primary: "#538EA6",
+      secondary: "#C7C9D8",
     },
 
     extend: {
       fontFamily: {
-        sans: ["Roboto", "sans-serif"],
+        sans: ["Montserrat", "sans-serif"],
       },
     },
   },
