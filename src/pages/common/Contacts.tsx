@@ -36,7 +36,7 @@ const Contacts: FC = () => {
         <TitleChapter>Контакти</TitleChapter>
       </div>
 
-      <section className="text-slate-900 body-font relative">
+      <section className="text-slate-900 body-font relative w-full">
         <div className="container px-5 pb-24 mx-auto flex sm:flex-nowrap flex-wrap">
           <div className="lg:w-2/3 md:w-1/2 bg-gray-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
             <iframe
@@ -81,11 +81,11 @@ const Contacts: FC = () => {
             ref={form}
             onSubmit={sendEmail}
           >
-            <h2 className="text-primary text-3xl mb-1 font-medium title-font text-center">
+            <h2 className="text-primary text-3xl mb-1 font-medium title-font text-center uppercase">
               контактна форма
             </h2>
             <p className="leading-relaxed mb-5 text-slate-600">
-              Заповніть форму, щоб замовити контактна форма
+              Заповніть форму, щоб замовити консультацію
             </p>
 
             <div className="relative mb-4">
@@ -155,8 +155,7 @@ const Contacts: FC = () => {
               Замовити консультацію
             </button>
             <p className="text-xs text-slate-500 mt-3">
-              *натискаючи «Відправити», Ви погоджуєтесь з політикою
-              конфіденційності.
+              *натискаючи «Замовити консультацію», Ви погоджуєтесь на обробку персональних даних.
             </p>
           </form>
           {}
