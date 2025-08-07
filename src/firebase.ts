@@ -1,3 +1,4 @@
+/*
 import {initializeApp} from 'firebase/app';
 import {getAnalytics, isSupported} from 'firebase/analytics';
 
@@ -20,3 +21,4 @@ isSupported().then((supported) => {
 });
 
 export default app;
+*/
