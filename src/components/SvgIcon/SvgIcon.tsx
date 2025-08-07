@@ -1,5 +1,5 @@
 import { FC } from "react";
-import iconsSprite from "/icons/icons.svg";
+
 interface SvgIconProps {
   icon: string;
   className?: string;
@@ -14,7 +14,7 @@ export const SvgIcon: FC<SvgIconProps> = ({
 }) => {
   return (
     <svg className={className} width={size} height={size} {...props}>
-      <use href={`${iconsSprite}#${icon}`} />
+      <use href={`/icons/icons.svg#${icon}`} />
     </svg>
   );
 };

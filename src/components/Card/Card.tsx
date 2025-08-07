@@ -11,13 +11,14 @@ const Card = () => {
       [id]: !prev[id],
     }));
   };
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {CARD.map((item) => (
           <div
             key={item.id}
-            className="h-40 cursor-pointer"
+            className="cursor-pointer"
             style={{ perspective: "1000px" }}
             onMouseEnter={() => toggleFlip(item.id)}
             onMouseLeave={() => toggleFlip(item.id)}
@@ -38,7 +39,7 @@ const Card = () => {
               >
                 <SvgIcon
                   icon={item.icon}
-                  className="object-cover max-w-12 text-primary"
+                  className="object-cover max-w-12 fill-primary"
                 />
                 <h1 className="text-lg sm:text-xl font-semibold uppercase">
                   {item.title}
@@ -47,7 +48,7 @@ const Card = () => {
 
               {/* Back of card */}
               <div
-                className=" flex items-center gap-x-3 sm:gap-x-7 px-4 border border-slate-300 bg-primary rounded-sm"
+                className="w-full h-full flex items-center gap-x-3 sm:gap-x-7 px-4 border border-slate-300 bg-primary rounded-sm"
                 style={{
                   backfaceVisibility: "hidden",
                   transform: "rotateX(180deg)",
@@ -55,11 +56,13 @@ const Card = () => {
               >
                 <SvgIcon
                   icon={item.icon}
-                  className="object-cover max-w-12 text-slate-100"
+                  className="object-cover max-w-12 fill-slate-100"
                 />
-                <p className="text-sm sm:text-base text-slate-100">
-                  {item.discription}
-                </p>
+                <ul className="w-full text-sm font-medium text-slate-100 list-disc pl-5 lowercase">
+                  {item.description.map((desc, index) => (
+                    <li key={index}>{desc}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

@@ -1,12 +1,11 @@
 import { FC } from "react";
 
 import Navbar from "./components/Navbar/Navbar";
-import lawyer from "/image/lawyer.png";
+import lawyer from "/image/lawyer.webp";
 
 const Header: FC = () => {
   return (
-    <header className="bg-gradient-to-r from-secondary/60 to-secondary h-[100vh] overflow-hidden">
-      {/*<header className="bg-[url('/image/back-header.png')] bg-cover bg-no-repeat h-[500px] md:h-[700px] lg:h-[100vh] ">*/}
+    <header className="bg-gradient-to-r from-secondary/60 to-secondary h-[100vh] overflow-hidden pt-4">
       <Navbar />
       <div className="flex flex-col md:flex-row items-center md:items-start md:px-12 justify-center">
         <section className="text-primary uppercase text-xl md:text-4xl xl:text-6xl font-bold justify-self-start py-3 md:py-16">
