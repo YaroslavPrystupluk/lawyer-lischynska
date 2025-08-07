@@ -48,7 +48,7 @@ const Contacts: FC = () => {
               style={{
                 filter: "opacity(0.8)",
               }}
-            ></iframe>
+            />
             <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
               <div className="lg:w-1/2 px-6">
                 <h2 className="title-font font-semibold text-primary tracking-widest text-xs">
@@ -158,7 +158,6 @@ const Contacts: FC = () => {
               *натискаючи «Замовити консультацію», Ви погоджуєтесь на обробку персональних даних.
             </p>
           </form>
-          {}
         </div>
       </section>
     </>
