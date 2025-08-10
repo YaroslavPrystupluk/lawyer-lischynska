@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import commonRouter from "./common.router";
 import Layout from "../Layout/Layout";
-import { ROLE } from "../types/types";
+import { ROLE } from "../types/types.ts";
 import adminRouter from "./admin.router";
 import { ErrorPage } from "../pages/common";
 
@@ -18,6 +18,7 @@ const getRouterByRole = (role: ROLE) => {
 
 const AppRouter = (): JSX.Element => {
   const role = ROLE.USER;
+
 
   const router = createBrowserRouter([
     {
