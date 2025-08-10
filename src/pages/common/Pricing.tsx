@@ -2,6 +2,9 @@ import { FC, useEffect, useState } from "react";
 import Spiner from "../../components/Spiner/Spiner";
 import { IPrices } from "../../types/types";
 import TitleChapter from "../../components/TitleChapter/TitleChapter";
+import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
+
+const siteUrl = "https://advocate-lishchynska.rivne.ua/pricing";
 
 const Pricing: FC = () => {
   const [prices, setPrices] = useState<IPrices[]>([]);
@@ -34,6 +37,14 @@ const Pricing: FC = () => {
 
   return (
     <>
+        <SEOHelper
+            title="Вартість послуг — Адвокат Тетяна Ліщинська"
+            description="Дізнайтесь вартість юридичних послуг адвоката Тетяни Ліщинської у Рівному."
+            keywords="адвокат Рівне, юридичні послуги, консультації, вартість послуг"
+            url={siteUrl}
+            image={`${siteUrl}/images/og-image.jpg`}
+        />
+
       <div className="relative my-8 sm:my-16">
         <TitleChapter>Вартість послуг</TitleChapter>
       </div>

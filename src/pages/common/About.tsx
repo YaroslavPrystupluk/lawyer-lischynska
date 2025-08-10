@@ -1,10 +1,21 @@
 import { FC } from "react";
+
 import TitleChapter from "../../components/TitleChapter/TitleChapter";
+import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
+
+const siteUrl = "https://advocate-lishchynska.rivne.ua/about";
 
 const About: FC = () => {
   return (
     <>
-      <div className="relative my-8 sm:my-16">
+        <SEOHelper
+            title="Про себе — Адвокат Тетяна Ліщинська"
+            description="Адвокат Тетяна Ліщинська - 14 років юридичного досвіду, керуюча Адвокатського бюро."
+            keywords="адвокат Рівне, юридичні послуги Рівне, адвокатські консультації"
+            url={siteUrl}
+            image={`${siteUrl}/images/og-image.jpg`}
+        />
+        <div className="relative my-8 sm:my-16">
         <TitleChapter>Про себе</TitleChapter>
       </div>
       <section className="mx-auto">

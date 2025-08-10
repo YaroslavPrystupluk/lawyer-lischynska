@@ -2,8 +2,12 @@ import { FC, FormEvent, useRef } from "react";
 import emailjs from "@emailjs/browser";
 
 import TitleChapter from "../../components/TitleChapter/TitleChapter.tsx";
+import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
+
+const siteUrl = "https://advocate-lishchynska.rivne.ua/contacts";
 
 const Contacts: FC = () => {
+
   const form = useRef<HTMLFormElement>(null);
   const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,6 +36,14 @@ const Contacts: FC = () => {
 
   return (
     <>
+        <SEOHelper
+            title="Контакти — Адвокат Ліщинська"
+            description="Контакти адвоката Ліщинської у Рівному. Адреса, телефон, email."
+            keywords="контакти адвокат Рівне, юридична допомога, адвокат телефон"
+            url={siteUrl}
+            image={`${siteUrl}/images/og-image.jpg`}
+        />
+
       <div className="relative my-8 sm:my-16">
         <TitleChapter>Контакти</TitleChapter>
       </div>

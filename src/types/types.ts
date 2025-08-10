@@ -8,3 +8,11 @@ export interface IPrices {
   name: string;
   price: string;
 }
+
+export interface IPost {
+    id: string;
+    img: string;
+    title: string;
+    description: string;
+    createDateAt: string;
+}

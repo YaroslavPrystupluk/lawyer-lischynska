@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://advocate-lishchynska.rivne.ua/sitemap.xml
