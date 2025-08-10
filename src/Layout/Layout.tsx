@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC, useRef, useState} from 'react';
 import { Outlet } from "react-router-dom";
 import { Header } from "../components";
 import Footer from "../components/Footer/Footer";
@@ -20,12 +20,6 @@ const Layout: FC = () => {
         }
         setModalIsOpen(false)
     }
-
-    useEffect(() => {
-        if (typeof document !== 'undefined') {
-            document.dispatchEvent(new Event('render-event'));
-        }
-    }, []);
 
   return (
     <>

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node generate-sitemap.js",
+    "generate-sitemap": "node generate-sitemap.js",
+    "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -36,9 +37,8 @@
     "postcss": "^8.4.47",
     "sitemap": "^8.0.0",
     "tailwindcss": "^3.4.11",
-    "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^6.3.5",
-    "vite-plugin-prerender": "^1.0.8"
+    "vite-plugin-ssr-ssg": "^1.4.1"
   }
 }

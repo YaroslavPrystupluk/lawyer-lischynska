@@ -1,23 +1,23 @@
 import { SitemapStream, streamToPromise } from 'sitemap';
 import { createWriteStream } from 'fs';
 import * as path from "path";
-import {IPost} from "./src/types/types";
+
 
 
 // Домен сайту
 const siteUrl = 'https://advocate-lishchynska.rivne.ua';
 
 //Отримуємо маршрути з API
-async function getBlogRoutes(): Promise<string[]> {
+async function getBlogRoutes() {
     try {
         const res = await fetch("https://example.com/api/blog");
-        const posts: unknown = await res.json();
+        const posts = await res.json();
 
         if (!Array.isArray(posts)) {
             throw new Error("Дані не є масивом");
         }
 
-        return (posts as IPost[]).map((post) => `/blog/${post.id}`);
+        return posts .map((post) => `/blog/${post.id}`);
     } catch (e) {
         console.error("Не вдалося завантажити пости:", e);
         return [];
