@@ -3,11 +3,11 @@ import emailjs from "@emailjs/browser";
 
 import TitleChapter from "../../components/TitleChapter/TitleChapter.tsx";
 import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
+import Toast from "../../components/Taost/Toast.tsx";
 
 const siteUrl = "https://advocate-lishchynska.rivne.ua/contacts";
 
 const Contacts: FC = () => {
-
   const form = useRef<HTMLFormElement>(null);
   const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,24 +25,35 @@ const Contacts: FC = () => {
       .then(
         () => {
           if (form.current) {
+            <Toast
+              type="success"
+              message="Ваш запит на звмовлення консультації не був відправлений"
+              iconName="Check icon"
+            />;
             form.current.reset();
           }
         },
         (error) => {
-          console.log("FAILED...", error.text);
+          <Toast
+            type="danger"
+            message={`Ваш запит на звмовлення консультації не був відправлений ${String(
+              error
+            )}`}
+            iconName="Error icon"
+          />;
         }
       );
   };
 
   return (
     <>
-        <SEOHelper
-            title="Контакти — Адвокат Ліщинська"
-            description="Контакти адвоката Ліщинської у Рівному. Адреса, телефон, email."
-            keywords="контакти адвокат Рівне, юридична допомога, адвокат телефон"
-            url={siteUrl}
-            image={`${siteUrl}/images/og-image.jpg`}
-        />
+      <SEOHelper
+        title="Контакти — Адвокат Ліщинська"
+        description="Контакти адвоката Ліщинської у Рівному. Адреса, телефон, email."
+        keywords="контакти адвокат Рівне, юридична допомога, адвокат телефон"
+        url={siteUrl}
+        image={`${siteUrl}/images/og-image.jpg`}
+      />
 
       <div className="relative my-8 sm:my-16">
         <TitleChapter>Контакти</TitleChapter>
@@ -167,11 +178,13 @@ const Contacts: FC = () => {
               Замовити консультацію
             </button>
             <p className="text-xs text-slate-500 mt-3">
-              *натискаючи «Замовити консультацію», Ви погоджуєтесь на обробку персональних даних.
+              *натискаючи «Замовити консультацію», Ви погоджуєтесь на обробку
+              персональних даних.
             </p>
           </form>
         </div>
       </section>
+      <Toast type="dander" message="error message" iconName="Error icon" />
     </>
   );
 };
