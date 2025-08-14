@@ -14,7 +14,7 @@ const Home: FC = () => {
             description="Адвокатське бюро Ліщинської. Юридичні консультації, представництво в суді, захист інтересів."
             keywords="адвокат Рівне, юридичні послуги Рівне, адвокатські консультації"
             url={siteUrl}
-            image={`${siteUrl}/images/og-image.jpg`}
+            image={`${siteUrl}/images/og-image.png`}
         />
       <CardMyExpertise />
       {/* <StatisticsCount/> */}

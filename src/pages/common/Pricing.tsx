@@ -42,7 +42,7 @@ const Pricing: FC = () => {
             description="Дізнайтесь вартість юридичних послуг адвоката Тетяни Ліщинської у Рівному."
             keywords="адвокат Рівне, юридичні послуги, консультації, вартість послуг"
             url={siteUrl}
-            image={`${siteUrl}/images/og-image.jpg`}
+            image={`${siteUrl}/images/og-image.png`}
         />
 
       <div className="relative my-8 sm:my-16">

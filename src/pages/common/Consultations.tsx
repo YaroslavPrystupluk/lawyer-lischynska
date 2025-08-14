@@ -11,7 +11,7 @@ const Consultations: FC = () => {
             description="Отримайте професійні консультації адвоката Тетяни Ліщинської у Рівному — допомога у різних юридичних питаннях"
             keywords="адвокат консультації, юридичні консультації, правові консультації"
             url={siteUrl}
-            image={`${siteUrl}/images/og-image.jpg`}
+            image={`${siteUrl}/images/og-image.png`}
         />
       <p>Consultations</p>
     </>

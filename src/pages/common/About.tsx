@@ -13,7 +13,7 @@ const About: FC = () => {
             description="Адвокат Тетяна Ліщинська - 14 років юридичного досвіду, керуюча Адвокатського бюро."
             keywords="адвокат Рівне, юридичні послуги Рівне, адвокатські консультації"
             url={siteUrl}
-            image={`${siteUrl}/images/og-image.jpg`}
+            image={`${siteUrl}/images/og-image.png`}
         />
         <div className="relative my-8 sm:my-16">
         <TitleChapter>Про себе</TitleChapter>

@@ -11,7 +11,7 @@ const Blog: FC = () => {
             description="Корисні статті та поради з права від адвоката Ліщинської."
             keywords="адвокат блог, юридичні статті, правова допомога"
             url={siteUrl}
-            image={`${siteUrl}/images/og-image.jpg`}
+            image={`${siteUrl}/images/og-image.png`}
         />
 
       <p>Blog</p>

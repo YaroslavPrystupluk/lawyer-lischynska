@@ -14,7 +14,7 @@ const Contacts: FC = () => {
                 description="Контакти адвоката Ліщинської у Рівному. Адреса, телефон, email."
                 keywords="контакти адвокат Рівне, юридична допомога, адвокат телефон"
                 url={siteUrl}
-                image={`${siteUrl}/images/og-image.jpg`}
+                image={`${siteUrl}/images/og-image.png`}
             />
 
             <div className="relative my-8 sm:my-16">
