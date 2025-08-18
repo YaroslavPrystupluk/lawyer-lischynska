@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
 import { db } from "../../firebase/firebaseConfig.ts";
 import { IPost } from "../../types/types.ts";
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 const siteUrl = "https://advocate-lishchynska.rivne.ua/blog";
 
