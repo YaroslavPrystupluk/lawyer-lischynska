@@ -22,7 +22,7 @@ const Footer = () => {
             </NavLink>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-            <ul className="text-slate-700 dark:text-slate-600 font-medium">
+            <ul className="text-slate-900 font-medium">
               {COMMON_ROUTES_NAME.map((item) => (
                 <li className="mb-4" key={item.id}>
                   <NavLink
@@ -30,7 +30,7 @@ const Footer = () => {
                     className={({ isActive }) =>
                       isActive
                         ? "text-slate-100 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase border-primary border-b-2 border-solid"
-                        : "text-black/70 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase hover:border-primary hover:border-b-2 hover:border-solid hover:text-slate-100"
+                        : "text-slate-900 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase hover:border-primary hover:border-b-2 hover:border-solid hover:text-slate-100"
                     }
                   >
                     {item.name}
@@ -38,7 +38,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-            <ul className="text-slate-700 dark:text-slate-600 font-medium">
+            <ul className="text-slate-900 font-medium">
               {COMMON_ROUTES_NAME_SUBMENU[0]?.submenu.map((item) => (
                 <li className="mb-4" key={item.id}>
                   <NavLink
@@ -56,15 +56,15 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
         <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-slate-700 sm:text-center dark:text-slate-600">
+          <span className="text-sm text-slate-900 sm:text-center">
             © {year} Адвокатське бюро "Тетяни Ліщинської"™ . Всі права захищені.
           </span>
           <div className="flex mt-4 sm:justify-center sm:mt-0">
             <a
               href="https://www.instagram.com/advocate_lishchynska_tetiana/"
-              className="text-slate-700 hover:text-slate-900 ms-5"
+              className="text-slate-900 hover:text-slate-100 ms-5"
               target="_blanc"
             >
               <svg
@@ -81,7 +81,7 @@ const Footer = () => {
             </a>
             <a
               href="mailto:tanya_lischynska@ukr.net"
-              className="text-slate-700 hover:text-slate-900 ms-5 flex justify-center items-center"
+              className="text-slate-900 hover:text-slate-100 ms-5 flex justify-center items-center"
             >
               tanya_lischynska@ukr.net
             </a>
