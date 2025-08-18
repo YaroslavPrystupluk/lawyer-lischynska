@@ -30,7 +30,7 @@ const Footer = () => {
                     className={({ isActive }) =>
                       isActive
                         ? "text-slate-100 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase border-primary border-b-2 border-solid"
-                        : "text-black/70 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase hover:border-primary hover:border-b-2 hover:border-solid hover:text-slate-100"
+                        : "text-slate-900 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase hover:border-primary hover:border-b-2 hover:border-solid hover:text-slate-100"
                     }
                   >
                     {item.name}
