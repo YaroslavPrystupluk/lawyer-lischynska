@@ -10,9 +10,9 @@ export interface IPrices {
 }
 
 export interface IPost {
-    id: string;
-    img: string;
-    title: string;
-    description: string;
-    createDateAt: string;
+  id: string;
+  img: string;
+  title: string;
+  description: string;
+  createDateAt: Date;
 }

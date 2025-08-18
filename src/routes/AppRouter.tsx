@@ -19,7 +19,6 @@ const getRouterByRole = (role: ROLE) => {
 const AppRouter = (): JSX.Element => {
   const role = ROLE.USER;
 
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -31,7 +30,7 @@ const AppRouter = (): JSX.Element => {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} future={{ v7_startTransition: true }} />
     </>
   );
 };

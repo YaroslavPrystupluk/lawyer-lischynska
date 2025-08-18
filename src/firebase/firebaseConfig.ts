@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
@@ -18,6 +19,12 @@ isSupported().then((supported) => {
   if (supported) {
     getAnalytics(app);
   }
+});
+
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider(import.meta.env.VITE_RECAPTCHA_SITEKEY),
+
+  isTokenAutoRefreshEnabled: true,
 });
 
 export const db = getFirestore(app);
