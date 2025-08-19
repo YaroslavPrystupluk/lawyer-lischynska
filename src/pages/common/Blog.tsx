@@ -3,6 +3,7 @@ import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
 import { db } from "../../firebase/firebaseConfig.ts";
 import { IPost } from "../../types/types.ts";
 import { collection, getDocs } from "firebase/firestore";
+import {BlogPost} from "./index.ts";
 
 const siteUrl = "https://advocate-lishchynska.rivne.ua/blog";
 
@@ -35,7 +36,13 @@ const Blog: FC = () => {
         image={`${siteUrl}/images/og-image.png`}
       />
 
-      <p>Blog</p>
+      <div className="flex gap-6 flex-wrap justify-center items-center">
+          {
+              posts.map(post => (
+                  <BlogPost  key={post.id} post={post} />
+              ))
+          }
+      </div>
     </>
   );
 };
