@@ -2,7 +2,7 @@ import { COMMON_ROUTES } from "./routes.name";
 import {
   About,
   Blog,
-  BlogPost,
+  Post,
   Contacts,
   Home,
   Pricing,
@@ -46,6 +46,6 @@ export default [
   },
   {
     path: COMMON_ROUTES.BLOG_POST,
-    element: <BlogPost />,
+    element: <Post />,
   },
 ];

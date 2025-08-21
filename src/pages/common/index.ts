@@ -1,6 +1,6 @@
 export { default as About } from "./About";
 export { default as Blog } from "./Blog";
-export { default as BlogPost } from "./BlogPost";
+export { default as Post } from "./Post";
 export { default as Contacts } from "./Contacts";
 export { default as ErrorPage } from "./ErrorPage";
 export { default as Home } from "./Home";
