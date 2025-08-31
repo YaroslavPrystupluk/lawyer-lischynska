@@ -70,13 +70,16 @@ const Post: FC = () => {
       <img
         src={post.img}
         alt={post.title}
-        className="w-full h-72 object-cover"
+        className="w-full h-full sm:h-80 object-cover"
       />
       <div className="p-6">
         <h1 className="text-3xl font-bold text-slate-900 mb-4">{post.title}</h1>
         <p className="text-slate-700 leading-relaxed whitespace-pre-line">
           {post.description}
         </p>
+        <p className="pt-4">З повагою, Адвокат Ліщинська Тетяна</p>
+        <span>моб. тел. </span>
+        <a href="tel:+380982592599">0982592599</a>
 
         {/* Кнопка назад */}
         <div className="mt-6">
