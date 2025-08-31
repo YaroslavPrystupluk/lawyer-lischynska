@@ -45,7 +45,7 @@ export default [
     element: <Blog />,
   },
   {
-    path: COMMON_ROUTES.BLOG_POST,
+    path: COMMON_ROUTES.POST,
     element: <Post />,
   },
 ];

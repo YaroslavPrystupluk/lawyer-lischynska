@@ -1,6 +1,5 @@
 import { FC } from "react";
 import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
-import AppMap from "../../components/AppMap/AppMap.tsx";
 
 const siteUrl = "https://advocate-lishchynska.rivne.ua/services/documentation";
 
@@ -16,19 +15,6 @@ const Documentation: FC = () => {
       />
 
       <p>Documentation</p>
-
-      <section className="w-full">
-        <div className="w-full h-[56vh] md:h-[480px] rounded-2xl overflow-hidden shadow">
-          <AppMap
-            center={{ lat: 50.64017349023539, lng: 26.199210758021827 }}
-            zoom={18}
-            options={{ clickableIcons: false }}
-            showCenterMarker
-            usePin
-            markerLabel="L"
-          />
-        </div>
-      </section>
     </>
   );
 };

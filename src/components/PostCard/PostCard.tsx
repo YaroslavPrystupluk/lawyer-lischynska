@@ -1,24 +1,35 @@
 import { FC } from "react";
 import { IPost } from "../../types/types.ts";
+import { generatePath, Link } from "react-router-dom";
 import { COMMON_ROUTES } from "../../routes/routes.name.ts";
-import { Link } from "react-router-dom";
 
 interface BlogPostProps {
   post: IPost;
 }
+
 const PostCard: FC<BlogPostProps> = ({ post }) => {
-  console.log(post);
   return (
-    <div className="max-w-sm bg-slate-100 border border-primary rounded-lg shadow-sm">
-      <img className="rounded-t-lg" src={post.img} alt={post.title} />
-      <div className="p-5">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-slate-900 ">
+    <div className="flex flex-col bg-slate-100 border border-primary rounded-lg shadow-sm h-full">
+      <div className="w-full aspect-video">
+        <img
+          className="w-full h-full rounded-t-lg object-cover object-center"
+          src={post.img}
+          alt={post.title}
+        />
+      </div>
+
+      <div className="p-5 flex flex-col flex-1">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-slate-900">
           {post.title}
         </h5>
-        <p className="mb-3 font-normal text-slate-900">{post["description"]}</p>
+
+        <p className="mb-3 font-normal text-slate-900 whitespace-pre-line line-clamp-3">
+          {post.description}
+        </p>
+
         <Link
-          to={COMMON_ROUTES.BLOG_POST}
-          className="inline-flex items-center  py-2 text-sm font-medium text-primary rounded-lg hover:text-primary/50 "
+          to={generatePath(COMMON_ROUTES.POST, { id: String(post.id) })}
+          className="inline-flex items-center py-2 text-sm font-medium text-primary rounded-lg hover:text-primary/50 mt-auto"
         >
           Читати більше
           <svg

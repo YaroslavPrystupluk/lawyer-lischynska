@@ -1,15 +1,10 @@
 import { FC } from "react";
-import { IPost } from "../../types/types.ts";
 import { useParams } from "react-router-dom";
 
-interface PostProps {
-  post: IPost;
-}
-const Post: FC<PostProps> = () => {
+const Post: FC = () => {
   const { id } = useParams();
-  console.log(id);
-
-  return <div>Post{id}</div>;
+  // тут вже можна завантажити пост по id з API або з локального масиву
+  return <div>Відкрито пост з id: {id}</div>;
 };
 
 export default Post;
