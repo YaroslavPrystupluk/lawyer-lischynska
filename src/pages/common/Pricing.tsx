@@ -45,52 +45,88 @@ const Pricing: FC = () => {
             image={`${siteUrl}/images/og-image.png`}
         />
 
-      <div className="relative my-8 sm:my-16">
-        <TitleChapter>Вартість послуг</TitleChapter>
-      </div>
+        <div className="relative my-8 sm:my-16">
+            <TitleChapter>Вартість послуг</TitleChapter>
+        </div>
 
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         {loading && (
-          <div className="text-center text-gray-500 py-4">
-            <Spiner />
-          </div>
+            <div className="text-center text-gray-500 py-8">
+                <Spiner />
+            </div>
         )}
 
-        {error && <p className="text-center text-red-600 py-4">{error}</p>}
+        {error && <p className="text-center text-red-600 py-6">{error}</p>}
 
         {!loading && !error && (
-          <table className="w-full text-sm text-left rtl:text-right text-slate-500 dark:text-gray-400">
-            <thead className="text-xs uppercase bg-primary text-gray-700">
-              <tr>
-                <th scope="col" className="px-6 py-3">
-                  Назва послуги
-                </th>
-                <th scope="col" className="px-6 py-3">
-                  Вартість
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {prices.map(({ id, name, price }) => (
-                <tr
-                  key={id}
-                  className="odd:bg-white even:bg-slate-100 border-b border-prymary text-primary"
-                >
-                  <th
-                    scope="row"
-                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                  >
-                    {name}
-                  </th>
-                  <td className="px-6 py-4 font-bold">{price}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+            <>
+                {/* Mobile: cards */}
+                <div className="md:hidden space-y-3">
+                    {prices.map(({ id, name, price }) => (
+                        <div
+                            key={id}
+                            className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+                        >
+                            <div className="text-xs uppercase tracking-wide text-slate-500">
+                                Назва послуги
+                            </div>
+                            <div className="mt-1 font-medium text-slate-900 break-words">
+                                {name}
+                            </div>
+
+                            <div className="mt-3 text-xs uppercase tracking-wide text-slate-500">
+                                Вартість
+                            </div>
+                            <div className="mt-1 font-semibold text-primary">
+                                {price}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Desktop/Tablet: table */}
+                <div className="relative mt-2 overflow-x-auto rounded-xl border border-slate-200 shadow-sm hidden md:block">
+                    <table className="w-full table-fixed text-left text-sm text-slate-600">
+                        <caption className="sr-only">
+                            Перелік послуг та їх вартість
+                        </caption>
+                        <thead className="bg-primary/10 text-xs uppercase text-slate-700 sticky top-0 z-10">
+                        <tr>
+                            <th scope="col" className="px-6 py-3 w-3/4">
+                                Назва послуги
+                            </th>
+                            <th scope="col" className="px-6 py-3 w-1/4">
+                                Вартість
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {prices.map(({ id, name, price }, idx) => (
+                            <tr
+                                key={id}
+                                className={`
+                      border-t border-slate-100
+                      ${idx % 2 === 0 ? "bg-white" : "bg-slate-50"}
+                    `}
+                            >
+                                <th
+                                    scope="row"
+                                    className="px-6 py-4 font-medium text-slate-900 break-words"
+                                >
+                                    {name}
+                                </th>
+                                <td className="px-6 py-4 font-semibold text-primary whitespace-nowrap">
+                                    {price}
+                                </td>
+                            </tr>
+                        ))}
+                        </tbody>
+                    </table>
+                </div>
+            </>
         )}
-      </div>
     </>
   );
 };
+
 
 export default Pricing;
