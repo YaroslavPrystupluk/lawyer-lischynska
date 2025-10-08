@@ -84,43 +84,35 @@ const Pricing: FC = () => {
                 </div>
 
                 {/* Desktop/Tablet: table */}
-                <div className="relative mt-2 overflow-x-auto rounded-xl border border-slate-200 shadow-sm hidden md:block">
-                    <table className="w-full table-fixed text-left text-sm text-slate-600">
-                        <caption className="sr-only">
-                            Перелік послуг та їх вартість
-                        </caption>
-                        <thead className="bg-primary/10 text-xs uppercase text-slate-700 sticky top-0 z-10">
-                        <tr>
-                            <th scope="col" className="px-6 py-3 w-3/4">
-                                Назва послуги
-                            </th>
-                            <th scope="col" className="px-6 py-3 w-1/4">
-                                Вартість
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {prices.map(({ id, name, price }, idx) => (
-                            <tr
-                                key={id}
-                                className={`
-                      border-t border-slate-100
-                      ${idx % 2 === 0 ? "bg-white" : "bg-slate-50"}
-                    `}
+                <div className="mt-2 overflow-x-auto rounded-xl border border-slate-200 shadow-sm hidden md:block">
+                <table className="w-full text-sm text-left rtl:text-right text-slate-500">
+                    <thead className="text-xs uppercase bg-primary text-white">
+                    <tr>
+                        <th scope="col" className="px-6 py-3">
+                            Назва послуги
+                        </th>
+                        <th scope="col" className="px-6 py-3">
+                            Вартість
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {prices.map(({ id, name, price }) => (
+                        <tr
+                            key={id}
+                            className="odd:bg-white even:bg-slate-100 border-b border-prymary text-primary"
+                        >
+                            <th
+                                scope="row"
+                                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                             >
-                                <th
-                                    scope="row"
-                                    className="px-6 py-4 font-medium text-slate-900 break-words"
-                                >
-                                    {name}
-                                </th>
-                                <td className="px-6 py-4 font-semibold text-primary whitespace-nowrap">
-                                    {price}
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                                {name}
+                            </th>
+                            <td className="px-6 py-4 font-bold">{price}</td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
                 </div>
             </>
         )}
