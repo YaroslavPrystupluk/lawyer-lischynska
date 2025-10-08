@@ -59,6 +59,7 @@ const Footer = () => {
 
                     <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-5">
                         {/* Facebook */}
+
                         <a
                             href="https://www.facebook.com/profile.php?id=61579070290567"
                             className="text-slate-900 hover:text-slate-100 transition-colors"
@@ -68,7 +69,7 @@ const Footer = () => {
                             title="Facebook"
                         >
                             <svg
-                                className="w-7 h-7 sm:w-8 sm:h-8"
+                                className="w-5 h-5 sm:w-6 sm:h-6"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor"
                                 viewBox="0 0 24 24"
@@ -116,35 +117,6 @@ const Footer = () => {
 export default Footer;
 
 
-// <footer className="bg-primary">
-//   <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-//     <div className="md:flex md:justify-between">
-//       <div className="mb-6 md:mb-0">
-//         <NavLink to="/" className="flex items-center">
-//           <img
-//             src={logoFull}
-//             alt="logo"
-//             className="block w-[200px] invert sepia brightness-200"
-//           />
-//         </NavLink>
-//       </div>
-//       <div className="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-1">
-//         <ul className="text-slate-900 font-medium">
-//           {COMMON_ROUTES_NAME.map((item) => (
-//             <li className="mb-4" key={item.id}>
-//               <NavLink
-//                 to={item.to}
-//                 className={({ isActive }) =>
-//                   isActive
-//                     ? "text-slate-100 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase border-primary border-b-2 border-solid"
-//                     : "text-slate-900 px-2 py-2 lg:text-base sm:text-sm font-semibold uppercase hover:border-primary hover:border-b-2 hover:border-solid hover:text-slate-100"
-//                 }
-//               >
-//                 {item.name}
-//               </NavLink>
-//             </li>
-//           ))}
-//         </ul>
 {/*<ul className="text-slate-900 font-medium">*/
 }
 {/*  {COMMON_ROUTES_NAME_SUBMENU[0]?.submenu.map((item) => (*/
