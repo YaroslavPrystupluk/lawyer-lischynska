@@ -23,7 +23,7 @@ export const getTotalPostsCount = async (): Promise<number> => {
 
 export const snapshotToPosts = (
   docs: QueryDocumentSnapshot<DocumentData>[]
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 ): IPost[] => docs.map((d) => ({ id: d.id, ...(d.data() as any) })) as IPost[];
 
 export const fetchPostsPage = async (
