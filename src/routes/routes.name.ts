@@ -7,10 +7,10 @@ export enum COMMON_ROUTES {
   SERVICES_SUPPORT = "services/support",
   CONTACTS = "contacts",
   BLOG = "blog",
-  POST = "/blog/post/:id",
+  POST = "blog/post/:id",
   NOT_FOUND = "404",
 }
 
 export enum ADMIN_ROUTES {
-  LOGIN = "/login",
+  LOGIN = "/enter-login",
 }

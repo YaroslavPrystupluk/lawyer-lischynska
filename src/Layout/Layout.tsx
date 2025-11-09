@@ -1,25 +1,25 @@
-import {FC, useRef, useState} from 'react';
+import { FC, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "../components";
 import Footer from "../components/Footer/Footer";
 import ButtonFloatingAction from "../components/ButtonFloatingAction/ButtonFloatingAction ";
-import Modal from '../components/Modal/Modal.tsx';
-import FeedBackModal from '../components/Modal/ContentModal/FeedBackModal.tsx';
+import Modal from "../components/Modal/Modal.tsx";
+import FeedBackModal from "../components/Modal/ContentModal/FeedBackModal.tsx";
 
 const Layout: FC = () => {
-    const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-    const form = useRef<HTMLFormElement>(null);
-    
-    const handleOpenModal = () => {
-        setModalIsOpen(true)
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const form = useRef<HTMLFormElement>(null);
+
+  const handleOpenModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    if (form.current) {
+      form.current.reset();
     }
-    
-    const handleCloseModal = () => {
-        if (form.current) {
-            form.current.reset();
-        }
-        setModalIsOpen(false)
-    }
+    setModalIsOpen(false);
+  };
 
   return (
     <>
@@ -29,13 +29,10 @@ const Layout: FC = () => {
       </div>
       <ButtonFloatingAction handleOpenModal={handleOpenModal} />
       <Footer />
-        <Modal onClose={handleCloseModal} open={modalIsOpen} >
-            <FeedBackModal
-                ref={form}
-                handleCloseModal={handleCloseModal}
-            />
-        </Modal>
-      </>
+      <Modal onClose={handleCloseModal} open={modalIsOpen}>
+        <FeedBackModal ref={form} handleCloseModal={handleCloseModal} />
+      </Modal>
+    </>
   );
 };
 

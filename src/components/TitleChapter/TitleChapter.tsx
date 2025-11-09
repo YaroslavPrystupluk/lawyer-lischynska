@@ -2,12 +2,21 @@ import { FC, ReactNode } from "react";
 
 interface TitleChapterProps {
   children: ReactNode;
+  className?: string;
 }
 
-const TitleChapter: FC<TitleChapterProps> = ({ children, ...props }) => {
+const TitleChapter: FC<TitleChapterProps> = ({
+  children,
+  className,
+  ...props
+}) => {
   return (
     <h1
-      className="text-3xl sm:text-5xl text-center font-bold before:content-[''] before:bg-primary before:absolute before:bottom-[-30%] sm:before:bottom-[-50%] before:left-[50%] before:translate-x-[-50%] before:w-20 before:h-1"
+      className={
+        className
+          ? className
+          : "text-3xl sm:text-5xl text-center font-bold before:content-[''] before:bg-primary before:absolute before:bottom-[-30%] sm:before:bottom-[-50%] before:left-[50%] before:translate-x-[-50%] before:w-20 before:h-1"
+      }
       {...props}
     >
       {children}

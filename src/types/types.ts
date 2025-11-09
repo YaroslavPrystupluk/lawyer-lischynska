@@ -15,4 +15,5 @@ export interface IPost {
   title: string;
   description: string;
   createDateAt: Date;
+  category: string
 }

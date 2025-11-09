@@ -1,4 +1,4 @@
-import { COMMON_ROUTES } from "./routes.name";
+import { ADMIN_ROUTES, COMMON_ROUTES } from "./routes.name";
 import {
   About,
   Blog,
@@ -10,6 +10,7 @@ import {
   ServicesDocumentation,
   ServicesSupport,
 } from "../pages/common";
+import { Login } from "../pages/admin";
 
 export default [
   {
@@ -47,5 +48,9 @@ export default [
   {
     path: COMMON_ROUTES.POST,
     element: <Post />,
+  },
+  {
+    path: ADMIN_ROUTES.LOGIN,
+    element: <Login />,
   },
 ];
