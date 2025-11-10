@@ -3,7 +3,7 @@ import { Disclosure } from "@headlessui/react";
 
 import BurgerMenu from "./components/BurgerMenu";
 import MenuDesctop from "./components/MenuDesctop";
-import logoutIcon from "/icons/logout.svg";
+import { SvgIcon } from "../../../SvgIcon/SvgIcon";
 // import MenuAdmin from "./components/MenuAdmin";
 import Logo from "./components/Logo";
 import { auth } from "../../../../firebase/firebaseConfig";
@@ -20,11 +20,7 @@ const Navbar: FC = () => {
         </div>
         {auth && (
           <button>
-            <img
-              className="w-8 h-8 fill-primary"
-              src={logoutIcon}
-              alt="вихід"
-            />
+            <SvgIcon icon="logout" className="w-8 h-8 fill-primary" />
           </button>
         )}
         {/*{ROLE.ADMIN && <MenuAdmin />}*/}
