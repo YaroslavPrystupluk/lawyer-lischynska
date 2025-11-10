@@ -6,8 +6,10 @@ import { PostsGrid } from "../../components/Blog/PostsGrid";
 import { Pagination } from "../../components/Blog/Pagination";
 import { useBlogPagination } from "../../hooks/useBlogPagination";
 import { BLOG_SITE_URL } from "../../constants/blog";
+import { useAuth } from "../../hooks/useAuth.ts";
 
 const Blog: FC = () => {
+  const { isAuthenticated } = useAuth();
   const {
     posts,
     loading,
@@ -44,6 +46,11 @@ const Blog: FC = () => {
 
       {!loading && totalCount > 0 && (
         <>
+          {isAuthenticated && (
+            <button className="text-cyan-50 bg-primary border-0 mb-6 py-2 px-6 focus:outline-none hover:bg-primary/80 rounded text-lg">
+              Додати пост
+            </button>
+          )}
           <PostsGrid posts={posts} />
 
           {showPagination && (
