@@ -15,5 +15,10 @@ export interface IPost {
   title: string;
   description: string;
   createDateAt: Date;
-  category: string
+  category: string;
+}
+
+export interface IAuth {
+  email: string;
+  password: string;
 }

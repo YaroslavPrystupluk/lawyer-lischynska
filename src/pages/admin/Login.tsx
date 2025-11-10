@@ -1,13 +1,45 @@
-import { FC } from "react";
+import { FC, FormEvent } from "react";
 import TitleChapter from "../../components/TitleChapter/TitleChapter";
+import { useLogin, useLogout } from "../../api/auth";
+import { auth } from "../../firebase/firebaseConfig";
+import { COMMON_ROUTES } from "../../routes/routes.name";
+import { useNavigate } from "react-router-dom";
+import { data } from "framer-motion/client";
 
 const Login: FC = () => {
-  const login = () => {
-    console.log("lofin");
+  const navigate = useNavigate();
+  const { mutate: mutateLogin } = useLogin(auth);
+  const { mutate: mutateLogout } = useLogout(auth);
+
+  const handleLogin = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const email = String(formData.get("email") || "");
+    const password = String(formData.get("password") || "");
+
+    mutateLogin(
+      { email, password },
+
+      {
+        onSuccess: () => {
+          navigate(COMMON_ROUTES.HOME);
+        },
+        onError: (error) => {
+          throw new Error(error.message);
+        },
+      }
+    );
   };
 
   const logout = () => {
-    console.log("logout");
+    mutateLogout(undefined, {
+      onSuccess: () => {
+        navigate(COMMON_ROUTES.HOME);
+      },
+      onError: (error) => {
+        throw new Error(error.message);
+      },
+    });
   };
 
   const inputBase =
@@ -17,7 +49,7 @@ const Login: FC = () => {
 
   return (
     <div className="w-full max-w-sm p-4 bg-white border border-primary rounded-lg shadow-sm sm:p-6 md:p-8">
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={handleLogin}>
         <div className="relative my-4">
           <TitleChapter className="text-2xl text-center font-bold before:content-[''] before:bg-primary before:absolute before:bottom-[-30%] sm:before:bottom-[-50%] before:left-[50%] before:translate-x-[-50%] before:w-20 before:h-1">
             Вхід
