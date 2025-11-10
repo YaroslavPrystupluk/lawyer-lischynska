@@ -1,15 +1,14 @@
 import { FC, FormEvent } from "react";
 import TitleChapter from "../../components/TitleChapter/TitleChapter";
-import { useLogin, useLogout } from "../../api/auth";
+import { useLogin } from "../../api/auth";
 import { auth } from "../../firebase/firebaseConfig";
 import { COMMON_ROUTES } from "../../routes/routes.name";
 import { useNavigate } from "react-router-dom";
-import { data } from "framer-motion/client";
+
 
 const Login: FC = () => {
   const navigate = useNavigate();
   const { mutate: mutateLogin } = useLogin(auth);
-  const { mutate: mutateLogout } = useLogout(auth);
 
   const handleLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -29,17 +28,6 @@ const Login: FC = () => {
         },
       }
     );
-  };
-
-  const logout = () => {
-    mutateLogout(undefined, {
-      onSuccess: () => {
-        navigate(COMMON_ROUTES.HOME);
-      },
-      onError: (error) => {
-        throw new Error(error.message);
-      },
-    });
   };
 
   const inputBase =

@@ -1,0 +1,24 @@
+import { FC, PropsWithChildren } from "react";
+import { Navigate } from "react-router-dom";
+import { COMMON_ROUTES } from "../../routes/routes.name";
+import { useAuth } from "../../hooks/useAuth";
+import Spiner from "../Spiner/Spiner";
+
+type Props = PropsWithChildren<{ redirectTo?: string }>;
+
+const GuestGuard: FC<Props> = ({
+  children,
+  redirectTo = COMMON_ROUTES.HOME,
+}) => {
+  const { isAuthenticated, loading } = useAuth();
+
+  if (loading) return <Spiner />;
+
+  return isAuthenticated ? (
+    <Navigate to={redirectTo} replace />
+  ) : (
+    <>{children}</>
+  );
+};
+
+export default GuestGuard;

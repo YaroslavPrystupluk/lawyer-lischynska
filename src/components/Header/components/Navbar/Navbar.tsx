@@ -1,15 +1,33 @@
 import { FC } from "react";
 import { Disclosure } from "@headlessui/react";
-
 import BurgerMenu from "./components/BurgerMenu";
 import MenuDesctop from "./components/MenuDesctop";
 import { SvgIcon } from "../../../SvgIcon/SvgIcon";
 // import MenuAdmin from "./components/MenuAdmin";
 import Logo from "./components/Logo";
 import { auth } from "../../../../firebase/firebaseConfig";
+import { useNavigate } from "react-router-dom";
+import { useLogout } from "../../../../api/auth";
+import { COMMON_ROUTES } from "../../../../routes/routes.name";
+import { useAuth } from "../../../../hooks/useAuth";
+import Spiner from "../../../Spiner/Spiner";
 // import { ROLE } from "../../../../types/types";
 
 const Navbar: FC = () => {
+  const { isAuthenticated, loading } = useAuth();
+  const navigate = useNavigate();
+  const { mutate: mutateLogout } = useLogout(auth);
+  const logout = () => {
+    mutateLogout(undefined, {
+      onSuccess: () => {
+        navigate(COMMON_ROUTES.HOME);
+      },
+      onError: (error) => {
+        throw new Error(error.message);
+      },
+    });
+  };
+  if (loading) return <Spiner />;
   return (
     <Disclosure as="nav">
       <div className="mx-auto max-w-8xl px-2 sm:px-4 lg:px-8 relative flex items-center justify-between">
@@ -18,9 +36,9 @@ const Navbar: FC = () => {
           <MenuDesctop />
           <BurgerMenu />
         </div>
-        {auth && (
-          <button>
-            <SvgIcon icon="logout" className="w-8 h-8 fill-primary" />
+        {isAuthenticated && (
+          <button onClick={logout} className="self-center">
+            <SvgIcon icon="logout" className="max-w-12 max-h-12 fill-primary" />
           </button>
         )}
         {/*{ROLE.ADMIN && <MenuAdmin />}*/}
