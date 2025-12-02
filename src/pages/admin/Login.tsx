@@ -4,7 +4,7 @@ import { useLogin } from "../../api/auth";
 import { auth } from "../../firebase/firebaseConfig";
 import { COMMON_ROUTES } from "../../routes/routes.name";
 import { useNavigate } from "react-router-dom";
-
+import Input from "../../components/Input/Input";
 
 const Login: FC = () => {
   const navigate = useNavigate();
@@ -30,10 +30,10 @@ const Login: FC = () => {
     );
   };
 
-  const inputBase =
-    "mb-4 w-full rounded border border-primary px-3 py-1 text-base outline-none focus:ring-1 focus:ring-primary";
+  // const inputBase =
+  //   "mb-4 w-full rounded border border-primary px-3 py-1 text-base outline-none focus:ring-1 focus:ring-primary";
 
-  const labelBase = "mb-1 text-sm text-slate-600";
+  // const labelBase = "mb-1 text-sm text-slate-600";
 
   return (
     <div className="w-full max-w-sm p-4 bg-white border border-primary rounded-lg shadow-sm sm:p-6 md:p-8">
@@ -44,26 +44,20 @@ const Login: FC = () => {
           </TitleChapter>
         </div>
         <div>
-          <label htmlFor="email" className={labelBase}>
-            Електронна пошта
-          </label>
-          <input
+          <Input
+            id="email"
             type="email"
             name="email"
-            id="emailLogin"
-            className={inputBase}
+            label="Електронна пошта"
             required
           />
         </div>
         <div>
-          <label htmlFor="password" className={labelBase}>
-            Пароль
-          </label>
-          <input
-            type="password"
-            name="password"
+          <Input
             id="password"
-            className={inputBase}
+            name="password"
+            type="password"
+            label="Пароль"
             required
           />
         </div>
