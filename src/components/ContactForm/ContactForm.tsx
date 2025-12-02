@@ -80,17 +80,6 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
             Заповніть форму, щоб замовити консультацію
           </p>
 
-          {/*<label htmlFor="name" className="mb-1 text-sm text-slate-600">*/}
-          {/*  Вкажіть ім'я і прізвище*/}
-          {/*</label>*/}
-          {/*<input*/}
-          {/*  id="name"*/}
-          {/*  name="name"*/}
-          {/*  required*/}
-          {/*  type="text"*/}
-          {/*  className="mb-4 w-full rounded border border-primary px-3 py-1 text-base outline-none focus:ring-1 focus:ring-primary"*/}
-          {/*/>*/}
-
           <Input
             id="name"
             type="text"
@@ -98,29 +87,14 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
             required
           />
 
-          {/* <label htmlFor="email" className="mb-1 text-sm text-slate-600">
-            Електронна пошта
-          </label>
-          <input
+          <Input
             id="email"
-            name="email"
-            required
             type="email"
-            className="mb-4 w-full rounded border border-primary px-3 py-1 text-base outline-none focus:ring-1 focus:ring-primary"
-          /> */}
-
-          <Input id="email" name="email" label="Електронна пошта" required />
-
-          {/* <label htmlFor="phone" className="mb-1 text-sm text-slate-600">
-            Ваш номер телефону
-          </label>
-          <input
-            id="phone"
-            name="phone"
+            name="email"
+            label="Електронна пошта"
             required
-            type="tel"
-            className="mb-4 w-full rounded border border-primary px-3 py-1 text-base outline-none focus:ring-1 focus:ring-primary"
-          /> */}
+          />
+
           <Input
             id="phone"
             type="tel"
@@ -129,16 +103,6 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
             required
           />
 
-          {/* <label htmlFor="message" className="mb-1 text-sm text-slate-600">
-            Ваше питання
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={5}
-            required
-            className="mb-4 w-full resize-none rounded border border-primary px-3 py-1 text-base outline-none focus:ring-1 focus:ring-primary"
-          ></textarea> */}
           <Input
             id="message"
             label="Ваше питання"
