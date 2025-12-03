@@ -8,9 +8,12 @@ export enum COMMON_ROUTES {
   CONTACTS = "contacts",
   BLOG = "blog",
   POST = "blog/post/:id",
+
   NOT_FOUND = "404",
 }
 
 export enum ADMIN_ROUTES {
   LOGIN = "/enter-login",
+  CREATE_POST = "blog/create-post",
+  EDIT_POST = "blog/edit/:id",
 }

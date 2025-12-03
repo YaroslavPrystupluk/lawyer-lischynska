@@ -5,9 +5,12 @@ import {
   useRef,
   useState,
 } from "react";
+import * as z from "zod";
 import Toast from "../../components/Taost/Toast.tsx";
 import emailjs from "@emailjs/browser";
 import Input from "../Input/Input.tsx";
+import TextArea from "../TextArea/TextArea.tsx";
+import {ContactFormData, contactFormSchema} from "../../zod/validateSchemas.ts"
 
 interface ContactFormProps {
   onSubmitSuccess?: () => void;
@@ -24,8 +27,20 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
     } | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const innerFormRef = useRef<HTMLFormElement>(null);
+      const [errors, setErrors] = useState<z.infer<ContactFormData>>();
 
     useImperativeHandle(ref, () => innerFormRef.current!);
+
+      const validateField = (name: string, value: string) => {
+          const partial = contactFormSchema.pick({ [name]: true });
+
+          const result = partial.safeParse({ [name]: value });
+
+          setErrors((prev) => ({
+              ...prev,
+              [name]: result.success ? "" : result.error.issues[0].message,
+          }));
+      };
 
     const sendEmail = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -103,11 +118,11 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
             required
           />
 
-          <Input
+          <TextArea
             id="message"
             label="Ваше питання"
+            name='message'
             rows={5}
-            classNameTextArea="resize-none"
             required
           />
 

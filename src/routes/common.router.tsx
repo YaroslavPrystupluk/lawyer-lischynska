@@ -11,6 +11,7 @@ import {
   ServicesSupport,
 } from "../pages/common";
 import { Login } from "../pages/admin";
+import CreatePost from "../pages/common/CreatePost.tsx";
 
 export default [
   {
@@ -48,6 +49,10 @@ export default [
   {
     path: COMMON_ROUTES.POST,
     element: <Post />,
+  },
+  {
+    path: ADMIN_ROUTES.CREATE_POST,
+    element: <CreatePost />,
   },
   {
     path: ADMIN_ROUTES.LOGIN,

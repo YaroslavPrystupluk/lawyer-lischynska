@@ -53,11 +53,11 @@ export const fetchPostsPage = async (
   return { posts, nextCursor };
 };
 
-const createPost = async (post: Omit<IPost, "id">): Promise<DocumentData> => {
+export const createPost = async (post: Omit<IPost, "id">): Promise<DocumentData> => {
   return addDoc(collRef, post);
 };
 
-const editPosts = async (
+export const editPosts = async (
   id: IPost["id"],
   edit: Partial<Omit<IPost, "id">>
 ): Promise<void> => {
@@ -65,7 +65,7 @@ const editPosts = async (
   await updateDoc(postDoc, edit);
 };
 
-const deletePost = async (id: IPost["id"]): Promise<void> => {
+export const deletePost = async (id: IPost["id"]): Promise<void> => {
   const postDoc = doc(collRef, id);
   await deleteDoc(postDoc);
 };

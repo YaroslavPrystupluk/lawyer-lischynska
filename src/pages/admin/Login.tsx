@@ -1,4 +1,4 @@
-import { FC, FormEvent } from "react";
+import {FC, FormEvent, useRef} from "react";
 import TitleChapter from "../../components/TitleChapter/TitleChapter";
 import { useLogin } from "../../api/auth";
 import { auth } from "../../firebase/firebaseConfig";
@@ -9,12 +9,17 @@ import Input from "../../components/Input/Input";
 const Login: FC = () => {
   const navigate = useNavigate();
   const { mutate: mutateLogin } = useLogin(auth);
-
+ const emailRef = useRef<HTMLInputElement>(null)
+ const passwordRef = useRef<HTMLInputElement>(null)
   const handleLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const email = String(formData.get("email") || "");
-    const password = String(formData.get("password") || "");
+    // const formData = new FormData(event.currentTarget);
+    // const data = Object.fromEntries(formData)
+    // const {email, password} = {...data}
+    // const email = String(formData.get("email") || "");
+    // const password = String(formData.get("password") || "");
+    const email = emailRef.current!.value;
+    const password = passwordRef.current!.value
 
     mutateLogin(
       { email, password },
@@ -29,11 +34,6 @@ const Login: FC = () => {
       }
     );
   };
-
-  // const inputBase =
-  //   "mb-4 w-full rounded border border-primary px-3 py-1 text-base outline-none focus:ring-1 focus:ring-primary";
-
-  // const labelBase = "mb-1 text-sm text-slate-600";
 
   return (
     <div className="w-full max-w-sm p-4 bg-white border border-primary rounded-lg shadow-sm sm:p-6 md:p-8">
@@ -50,6 +50,7 @@ const Login: FC = () => {
             name="email"
             label="Електронна пошта"
             required
+            ref={emailRef}
           />
         </div>
         <div>
@@ -59,6 +60,7 @@ const Login: FC = () => {
             type="password"
             label="Пароль"
             required
+            ref={passwordRef}
           />
         </div>
 

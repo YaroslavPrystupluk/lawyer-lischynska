@@ -11,6 +11,7 @@ export interface IPrices {
 
 export interface IPost {
   id: string;
+  userId: string;
   img: string;
   title: string;
   description: string;
