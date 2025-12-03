@@ -8,7 +8,7 @@ export const contactFormSchema = z.object({
     email: z.email("Електронна пошта вказана невірно").trim(),
     phone: z
         .string()
-        .regex(/^\+?[0-9\s\-]{10,16}$/, "Некоректний номер телефону").trim(),
+        .regex(/^\+?[0-9\s-]{10,16}$/, "Некоректний номер телефону").trim(),
 
     message: z
         .string()
