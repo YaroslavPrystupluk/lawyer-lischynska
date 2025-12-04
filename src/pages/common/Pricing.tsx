@@ -1,13 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import Spiner from "../../components/Spiner/Spiner";
-import { IPrices } from "../../types/types";
+import { Prices } from "../../types/types";
 import TitleChapter from "../../components/TitleChapter/TitleChapter";
 import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
 
 const siteUrl = "https://advocate-lishchynska.rivne.ua/pricing";
 
 const Pricing: FC = () => {
-  const [prices, setPrices] = useState<IPrices[]>([]);
+  const [prices, setPrices] = useState<Prices[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 

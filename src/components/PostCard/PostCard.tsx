@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { IPost } from "../../types/types.ts";
+import { Post } from "../../types/types.ts";
 import { generatePath, Link } from "react-router-dom";
 import { COMMON_ROUTES } from "../../routes/routes.name.ts";
 
-interface BlogPostProps {
-  post: IPost;
+type BlogPostProps = {
+  post: Post;
 }
 
 const PostCard: FC<BlogPostProps> = ({ post }) => {

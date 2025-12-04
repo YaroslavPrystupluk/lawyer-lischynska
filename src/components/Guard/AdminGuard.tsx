@@ -6,18 +6,19 @@ import Spiner from "../Spiner/Spiner";
 
 type GuestGuardProps = PropsWithChildren<{ redirectTo?: string }>;
 
-const GuestGuard: FC<GuestGuardProps> = ({
+const AdminGuard: FC<GuestGuardProps> = ({
   children,
   redirectTo = COMMON_ROUTES.HOME,
 }) => {
   const { isAuthenticated, loading } = useAuth();
 
   if (loading) return <Spiner />;
-  return isAuthenticated ? (
+
+  return !isAuthenticated ? (
     <Navigate to={redirectTo} replace />
   ) : (
     <>{children}</>
   );
 };
 
-export default GuestGuard;
+export default AdminGuard;

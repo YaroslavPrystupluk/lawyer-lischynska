@@ -1,12 +1,12 @@
 import { FC, useEffect } from "react";
 
-interface IToastProps {
+type ToastProps = {
     type: string;
     message: string;
     onClose: () => void;
 }
 
-const Toast: FC<IToastProps> = ({ type, message, onClose }) => {
+const Toast: FC<ToastProps> = ({ type, message, onClose }) => {
     useEffect(() => {
         const closeToast = setTimeout(() => onClose(), 5000);
         return () => clearTimeout(closeToast);

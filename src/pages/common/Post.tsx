@@ -2,14 +2,14 @@ import { FC, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
-import type { IPost } from "../../types/types";
+import type { Post } from "../../types/types";
 import Spiner from "../../components/Spiner/Spiner";
 
 const Post: FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const [post, setPost] = useState<IPost | null>(null);
+  const [post, setPost] = useState<Post | null>(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState<string | null>(null);
 
@@ -30,7 +30,7 @@ const Post: FC = () => {
           }
           return;
         }
-        const data = snap.data() as Omit<IPost, "id">;
+        const data = snap.data() as Omit<Post, "id">;
         if (isMounted) setPost({ id: snap.id, ...data });
       } catch (e: any) {
         if (isMounted) setErr(e.message ?? "Помилка завантаження");

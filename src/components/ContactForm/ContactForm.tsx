@@ -5,19 +5,20 @@ import {
   useRef,
   useState,
 } from "react";
-import * as z from "zod";
 import Toast from "../../components/Taost/Toast.tsx";
 import emailjs from "@emailjs/browser";
 import Input from "../Input/Input.tsx";
 import TextArea from "../TextArea/TextArea.tsx";
 import {ContactFormData, contactFormSchema} from "../../zod/validateSchemas.ts"
 
-interface ContactFormProps {
+type ContactFormProps = {
   onSubmitSuccess?: () => void;
   onSubmitError?: (error: Error) => void;
   showLoading?: boolean;
   autoReset?: boolean;
 }
+
+type FormErrors = Partial<Record<keyof ContactFormData, string>>;
 
 const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
   ({ onSubmitSuccess, onSubmitError, autoReset = true }, ref) => {
@@ -27,24 +28,33 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
     } | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const innerFormRef = useRef<HTMLFormElement>(null);
-      const [errors, setErrors] = useState<z.infer<ContactFormData>>();
+      const [errors, setErrors] = useState<FormErrors>({});
 
     useImperativeHandle(ref, () => innerFormRef.current!);
 
-      const validateField = (name: string, value: string) => {
-          const partial = contactFormSchema.pick({ [name]: true });
-
-          const result = partial.safeParse({ [name]: value });
-
-          setErrors((prev) => ({
-              ...prev,
-              [name]: result.success ? "" : result.error.issues[0].message,
-          }));
+      const clearFieldError = (field: keyof ContactFormData) => {
+          setErrors(prev => ({ ...prev, [field]: undefined }));
       };
 
     const sendEmail = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (!innerFormRef.current) return;
+       const formData = new FormData(innerFormRef.current);
+        const data = Object.fromEntries(formData.entries());
+        const validation = contactFormSchema.safeParse(data);
+
+        if (!validation.success) {
+            const newErrors: FormErrors = {};
+
+            validation.error.issues.forEach((issue) => {
+                const field = issue.path[0] as keyof ContactFormData;
+                newErrors[field] = issue.message;
+            });
+
+            setErrors(newErrors);
+            return;
+        }
+
 
       setIsLoading(true);
       emailjs
@@ -83,23 +93,23 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
             onClose={() => setToast(null)}
           />
         )}
+
+          <h2 className="text-primary text-3xl mb-1 font-medium title-font text-center uppercase">
+              контактна форма
+          </h2>
+          <p className="leading-relaxed mb-5 text-slate-600 text-center">
+              Заповніть форму, щоб замовити консультацію
+          </p>
         <form
           ref={innerFormRef}
           onSubmit={sendEmail}
           className="flex flex-col w-full"
-        >
-          <h2 className="text-primary text-3xl mb-1 font-medium title-font text-center uppercase">
-            контактна форма
-          </h2>
-          <p className="leading-relaxed mb-5 text-slate-600">
-            Заповніть форму, щоб замовити консультацію
-          </p>
-
-          <Input
+        >          <Input
             id="name"
             type="text"
             label="Вкажіть ім'я і прізвищ"
-            required
+            error={errors.name}
+            onChange={() => clearFieldError("name")}
           />
 
           <Input
@@ -107,7 +117,8 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
             type="email"
             name="email"
             label="Електронна пошта"
-            required
+            error={errors.email}
+            onChange={() => clearFieldError("email")}
           />
 
           <Input
@@ -115,15 +126,17 @@ const ContactForm = forwardRef<HTMLFormElement, ContactFormProps>(
             type="tel"
             label="Ваш номер телефону"
             name="phone"
-            required
+            error={errors.phone}
+            onChange={() => clearFieldError("phone")}
           />
 
           <TextArea
             id="message"
             label="Ваше питання"
-            name='message'
+            name="message"
             rows={5}
-            required
+            error={errors.message}
+            onChange={() => clearFieldError("message")}
           />
 
           {isLoading ? (

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 
-interface TitleChapterProps {
+type TitleChapterProps = {
   children: ReactNode;
   className?: string;
 }

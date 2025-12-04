@@ -6,6 +6,7 @@ import adminRouter from "./admin.router";
 import { ErrorPage } from "../pages/common";
 import LayoutAuth from "../Layout/LayoutAuth.tsx";
 import { ADMIN_ROUTES, COMMON_ROUTES } from "./routes.name.ts";
+import type {ReactElement} from "react";
 
 const getRouterByRole = (role: ROLE) => {
   switch (role) {
@@ -18,7 +19,7 @@ const getRouterByRole = (role: ROLE) => {
   }
 };
 
-const AppRouter = (): JSX.Element => {
+const AppRouter = (): ReactElement => {
   const user = ROLE.USER;
   const admin = ROLE.ADMIN;
 

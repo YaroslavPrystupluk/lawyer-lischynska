@@ -15,7 +15,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { POSTS_COLLECTION, DATE_FIELD, PAGE_SIZE } from "../constants/blog";
-import type { IPost } from "../types/types";
+import type { Post } from "../types/types";
 
 export type PageCursor = QueryDocumentSnapshot<DocumentData> | null;
 
@@ -30,12 +30,12 @@ export const snapshotToPosts = (
   docs: QueryDocumentSnapshot<DocumentData>[]
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): IPost[] => docs.map((d) => ({ id: d.id, ...(d.data() as any) })) as IPost[];
+): Post[] => docs.map((d) => ({ id: d.id, ...(d.data() as any) })) as Post[];
 
 export const fetchPostsPage = async (
   page: number,
   cursor: PageCursor
-): Promise<{ posts: IPost[]; nextCursor: PageCursor }> => {
+): Promise<{ posts: Post[]; nextCursor: PageCursor }> => {
   const collRef = collection(db, POSTS_COLLECTION);
   const qBase =
     page === 1
@@ -53,19 +53,19 @@ export const fetchPostsPage = async (
   return { posts, nextCursor };
 };
 
-export const createPost = async (post: Omit<IPost, "id">): Promise<DocumentData> => {
+export const createPost = async (post: Omit<Post, "id">): Promise<DocumentData> => {
   return addDoc(collRef, post);
 };
 
 export const editPosts = async (
-  id: IPost["id"],
-  edit: Partial<Omit<IPost, "id">>
+  id: Post["id"],
+  edit: Partial<Omit<Post, "id">>
 ): Promise<void> => {
   const postDoc = doc(collRef, id);
   await updateDoc(postDoc, edit);
 };
 
-export const deletePost = async (id: IPost["id"]): Promise<void> => {
+export const deletePost = async (id: Post["id"]): Promise<void> => {
   const postDoc = doc(collRef, id);
   await deleteDoc(postDoc);
 };

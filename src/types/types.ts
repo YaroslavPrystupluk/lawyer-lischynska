@@ -3,13 +3,13 @@ export enum ROLE {
   USER = "user",
 }
 
-export interface IPrices {
+export type Prices = {
   id: number;
   name: string;
   price: string;
 }
 
-export interface IPost {
+export type Post = {
   id: string;
   userId: string;
   img: string;
@@ -19,7 +19,7 @@ export interface IPost {
   category: string;
 }
 
-export interface IAuth {
+export type Authorisation = {
   email: string;
   password: string;
 }

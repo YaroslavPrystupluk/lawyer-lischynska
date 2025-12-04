@@ -1,7 +1,7 @@
 import {Helmet} from "react-helmet-async";
 import {FC} from "react";
 
-interface ISEOHelperProps {
+type ISEOHelperProps = {
     title: string;
     description: string;
     keywords: string;

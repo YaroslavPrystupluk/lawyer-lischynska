@@ -1,4 +1,4 @@
-import { ADMIN_ROUTES, COMMON_ROUTES } from "./routes.name";
+import { COMMON_ROUTES } from "./routes.name";
 import {
   About,
   Blog,
@@ -10,8 +10,8 @@ import {
   ServicesDocumentation,
   ServicesSupport,
 } from "../pages/common";
-import { Login } from "../pages/admin";
 import CreatePost from "../pages/common/CreatePost.tsx";
+import AdminGuard from "../components/Guard/AdminGuard.tsx";
 
 export default [
   {
@@ -51,11 +51,11 @@ export default [
     element: <Post />,
   },
   {
-    path: ADMIN_ROUTES.CREATE_POST,
-    element: <CreatePost />,
-  },
-  {
-    path: ADMIN_ROUTES.LOGIN,
-    element: <Login />,
+    path: COMMON_ROUTES.CREATE_POST,
+    element: (
+        <AdminGuard>
+          <CreatePost />
+        </AdminGuard>
+    ),
   },
 ];

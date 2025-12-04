@@ -18,9 +18,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((
         "mb-4 w-full rounded border border-primary px-3 py-1 text-base outline-none focus:ring-1 focus:ring-primary";
 
     const defaultClassNameLabelError = "text-sm text-red-500 mt-1";
-    const defaultClassNameInputError = "mb-4 w-full rounded border border-red px-3 py-1 text-base outline-none focus:ring-1 focus:ring-red";
-
-
+    const defaultClassNameInputError = "mb-1 w-full rounded border border-red-500 px-3 py-1 text-base outline-none focus:ring-1 focus:ring-red";
     return (
         <>
             <label htmlFor={id}
@@ -34,7 +32,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((
                 ref={ref}
                 {...props}
             />
-            {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
+            {error && <p className="text-sm text-red-500 mb-4">{error}</p>}
         </>
     );
 });

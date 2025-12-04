@@ -19,7 +19,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((
         "mb-4 w-full rounded border resize-none border-primary px-3 py-1 text-base outline-none focus:ring-1 focus:ring-primary";
 
     const defaultClassNameLabelError = "text-sm text-red-500 mt-1";
-    const defaultClassNameTextAreaError = "mb-4 w-full resize-none rounded border border-red px-3 py-1 text-base outline-none focus:ring-1 focus:ring-red";
+    const defaultClassNameTextAreaError = "mb-1 w-full resize-none rounded border border-red-500 px-3 py-1 text-base outline-none focus:ring-1 focus:ring-red";
 
     return (
         <>
@@ -33,6 +33,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextareaProps>((
                 className={error ? defaultClassNameTextAreaError : (classNameTextArea ?? defaultClassNameTextArea)}
                 {...props}
             ></textarea>
+            {error && <p className="text-sm text-red-500 mb-4">{error}</p>}
         </>
     );
 });
