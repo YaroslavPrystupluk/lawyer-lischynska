@@ -67,14 +67,15 @@ const Post: FC = () => {
 
   return (
       <article className="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
-        <h1 className="text-3xl font-bold text-slate-900 mb-4">{post.title}</h1>
+
 
         <div className="mb-4">
           <img
               src={post.img}
               alt={post.title}
-              className="float-right w-80 h-full object-cover ml-4 mb-2 rounded-lg"
+              className="float-right w-full h-full object-cover ml-4 mb-2 rounded-lg"
           />
+          <h1 className="text-3xl font-bold text-slate-900 mb-4">{post.title}</h1>
           <p className="text-slate-700 leading-relaxed whitespace-pre-line">
             {post.description}
           </p>
