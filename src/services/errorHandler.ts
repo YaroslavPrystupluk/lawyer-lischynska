@@ -3,7 +3,7 @@ import { FirebaseError } from "firebase/app";
 // https://firebase.google.com/docs/auth/admin/errors
 
 export const generateFirebaseAuthErrorMessage = (error: FirebaseError) => {
-  let message: string | null = null;
+  let message: string | null;
   if (error?.code == "auth/invalid-credential") {
     message =  "Недійсні електронна пошта або пароль. Спробуйте ще раз.";
   } else {
