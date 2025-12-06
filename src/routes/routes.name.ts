@@ -7,9 +7,9 @@ export enum COMMON_ROUTES {
   SERVICES_SUPPORT = "services/support",
   CONTACTS = "contacts",
   BLOG = "blog",
-  POST = "blog/post/:id",
-  CREATE_POST = "blog/create-post",
-  EDIT_POST = "blog/edit/:id",
+  POST = "/blog/post/:id",
+  CREATE_POST = "/blog/create-post",
+  EDIT_POST = "/blog/edit/:id",
   NOT_FOUND = "404",
 }
 

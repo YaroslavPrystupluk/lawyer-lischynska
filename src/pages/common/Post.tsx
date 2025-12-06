@@ -66,17 +66,20 @@ const Post: FC = () => {
   }
 
   return (
-    <article className="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-      <img
-        src={post.img}
-        alt={post.title}
-        className="w-full h-full sm:h-80 object-cover"
-      />
-      <div className="p-6">
+      <article className="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
         <h1 className="text-3xl font-bold text-slate-900 mb-4">{post.title}</h1>
-        <p className="text-slate-700 leading-relaxed whitespace-pre-line">
-          {post.description}
-        </p>
+
+        <div className="mb-4">
+          <img
+              src={post.img}
+              alt={post.title}
+              className="float-right w-80 h-full object-cover ml-4 mb-2 rounded-lg"
+          />
+          <p className="text-slate-700 leading-relaxed whitespace-pre-line">
+            {post.description}
+          </p>
+        </div>
+
         <p className="pt-4">З повагою, Адвокат Ліщинська Тетяна</p>
         <span>моб. тел. </span>
         <a href="tel:+380982592599">0982592599</a>
@@ -84,14 +87,15 @@ const Post: FC = () => {
         {/* Кнопка назад */}
         <div className="mt-6">
           <button
-            onClick={() => navigate(-1)}
-            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80"
+              onClick={() => navigate(-1)}
+              className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80"
           >
             ← Назад
           </button>
         </div>
-      </div>
-    </article>
+      </article>
+
+
   );
 };
 

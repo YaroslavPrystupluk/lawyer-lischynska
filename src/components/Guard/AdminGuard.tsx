@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from "react";
-import { Navigate } from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 import { COMMON_ROUTES } from "../../routes/routes.name";
 import { useAuth } from "../../hooks/useAuth";
 import Spiner from "../Spiner/Spiner";
@@ -7,7 +7,6 @@ import Spiner from "../Spiner/Spiner";
 type GuestGuardProps = PropsWithChildren<{ redirectTo?: string }>;
 
 const AdminGuard: FC<GuestGuardProps> = ({
-  children,
   redirectTo = COMMON_ROUTES.HOME,
 }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -17,7 +16,7 @@ const AdminGuard: FC<GuestGuardProps> = ({
   return !isAuthenticated ? (
     <Navigate to={redirectTo} replace />
   ) : (
-    <>{children}</>
+    <Outlet/>
   );
 };
 
