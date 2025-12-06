@@ -5,13 +5,7 @@ export const login = async (
     email: string,
     password: string
 ): Promise<void> => {
-    try {
-
-        await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+    await signInWithEmailAndPassword(auth, email, password);
 };
 
 export const logout = async (auth: Auth): Promise<void> => {

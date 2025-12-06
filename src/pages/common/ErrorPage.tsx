@@ -15,7 +15,7 @@ const ErrorPage: FC = () => {
   return (
     <div className="flex flex-col items-center justify-center text-center h-[100vh] bg-gradient-to-r from-secondary to-secondary/30">
       <img className="w-1/5" src={imageError} alt="image page not found" />
-      <h3 className="text-2xl font-bold my-5 text-cyan-900">Упс! Сторінка не знайдена.</h3>
+      <h3 className="text-2xl font-bold my-5 text-cyan-900">Ой! Щось пішло не так. Сторінку не знайдена.</h3>
       <p className="text-lg mb-5 text-cyan-900">
           Сторінка, яку ви шукаєте, могла бути видалена, змінити назву або тимчасово недоступна.
       </p>

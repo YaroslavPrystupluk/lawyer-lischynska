@@ -6,6 +6,8 @@ import {COMMON_ROUTES} from "../../routes/routes.name";
 import {useNavigate} from "react-router-dom";
 import Input from "../../components/Input/Input";
 import {LoginFormData, loginFormSchema} from "../../zod/validateSchemas.ts";
+import {FirebaseError} from "firebase/app";
+import {generateFirebaseAuthErrorMessage} from "../../services/errorHandler.ts";
 
 type FormErrors = Partial<Record<keyof LoginFormData, string>>;
 
@@ -18,7 +20,7 @@ const Login: FC = () => {
     const [serverError, setServerError] = useState<string | null>(null);
 
     const clearFieldError = (field: keyof LoginFormData) => {
-        setErrors(prev => ({ ...prev, [field]: undefined }));
+        setErrors(prev => ({...prev, [field]: undefined}));
     };
 
     const handleLogin = (event: FormEvent<HTMLFormElement>) => {
@@ -26,7 +28,7 @@ const Login: FC = () => {
         const email = emailRef.current!.value;
         const password = passwordRef.current!.value
 
-           const validation = loginFormSchema.safeParse({email, password})
+        const validation = loginFormSchema.safeParse({email, password})
         if (!validation.success) {
             const newErrors: FormErrors = {};
 
@@ -45,10 +47,12 @@ const Login: FC = () => {
                 onSuccess: () => {
                     navigate(COMMON_ROUTES.HOME);
                 },
-                onError: (error: any) => {
-                    if (error.code === "auth/invalid-credential") {
-                        setServerError("Помилка авторизації");
-                                           }
+                onError: (error) => {
+                    if (error instanceof FirebaseError) {
+                        const notification = generateFirebaseAuthErrorMessage(error);
+                        console.log(notification)
+                        setServerError(notification)
+                    }
                 },
             }
         );
