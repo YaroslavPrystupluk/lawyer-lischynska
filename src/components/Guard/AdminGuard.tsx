@@ -7,7 +7,7 @@ import Spiner from "../Spiner/Spiner";
 type GuestGuardProps = PropsWithChildren<{ redirectTo?: string }>;
 
 const AdminGuard: FC<GuestGuardProps> = ({
-  redirectTo = COMMON_ROUTES.HOME,
+  redirectTo = COMMON_ROUTES.NOT_FOUND,
 }) => {
   const { isAuthenticated, loading } = useAuth();
 
