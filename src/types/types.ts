@@ -1,13 +1,8 @@
-export enum ROLE {
-  ADMIN = "admin",
-  USER = "user",
-}
-
 export type Prices = {
   id: number;
   name: string;
   price: string;
-}
+};
 
 export type Post = {
   id: string;
@@ -17,9 +12,9 @@ export type Post = {
   description: string;
   createDateAt: Date;
   category: string;
-}
+};
 
 export type Authorisation = {
   email: string;
   password: string;
-}
+};
