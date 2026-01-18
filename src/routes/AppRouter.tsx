@@ -36,6 +36,7 @@ const AppRouter = (): ReactElement => {
         { path: COMMON_ROUTES.PRICING, element: <Pricing /> },
       ],
     },
+
     {
       path: ADMIN_ROUTES.ROOT,
       element: <LayoutAuth />,
@@ -43,19 +44,23 @@ const AppRouter = (): ReactElement => {
       children: [
         { index: true, element: <Navigate to={ADMIN_ROUTES.LOGIN} replace /> },
         { path: "login", element: <Login /> },
-      ],
-    },
-    {
-      path: ADMIN_ROUTES.ROOT,
-      element: <AdminGuard />,
-      errorElement: <ErrorPage />,
-      children: [
         {
           index: true,
           element: <Navigate to={ADMIN_ROUTES.CREATE_POST} replace />,
         },
-        { path: ADMIN_ROUTES.CREATE_POST, element: <CreatePost /> },
-        // {path: ADMIN_ROUTES.EDIT_POST, element: </>},
+        {
+          element: <AdminGuard />,
+          children: [
+            { path: ADMIN_ROUTES.CREATE_POST, element: <CreatePost /> },
+            {
+              index: true,
+              element: <Navigate to={ADMIN_ROUTES.CREATE_POST} replace />,
+            },
+
+            // приклад інших сторінок
+            // { path: "edit/:id", element: <EditPost /> },
+          ],
+        },
       ],
     },
   ]);
