@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import TitleChapter from "../TitleChapter/TitleChapter";
-import Card from "../Card/Card";
+import TitleChapter from "../../TitleChapter/TitleChapter";
+import Card from "../../Card/Card";
 
 const CardMyExpertise: FC = () => {
   return (
