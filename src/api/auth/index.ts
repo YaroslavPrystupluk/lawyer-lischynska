@@ -1,18 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
 import { login, logout } from "../../services/authService";
-import { Auth } from "firebase/auth";
+import { Auth, AuthError, UserCredential } from "firebase/auth";
 import { Authorisation } from "../../types/types";
 
 export const useLogin = (auth: Auth) => {
-  {
-    return useMutation({
-      mutationFn: ({ email, password }: Authorisation) => login(auth, email, password),
-    });
-  }
+  return useMutation<UserCredential, AuthError, Authorisation>({
+    mutationFn: ({ email, password }) => login(auth, email, password),
+  });
 };
 
 export const useLogout = (auth: Auth) => {
-  return useMutation({
+  return useMutation<void, Error, void>({
     mutationFn: () => logout(auth),
   });
 };

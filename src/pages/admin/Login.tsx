@@ -6,6 +6,7 @@ import { COMMON_ROUTES } from "../../routes/routes.name";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input";
 import { LoginFormData, loginFormSchema } from "../../zod/validateSchemas.ts";
+import { AuthError } from "firebase/auth";
 
 type FormErrors = Partial<Record<keyof LoginFormData, string>>;
 
@@ -45,7 +46,7 @@ const Login: FC = () => {
         onSuccess: () => {
           navigate(COMMON_ROUTES.HOME);
         },
-        onError: (error: any) => {
+        onError: (error: AuthError) => {
           if (error.code === "auth/invalid-credential") {
             setServerError("Помилка авторизації");
           }

@@ -63,7 +63,6 @@ const CreatePost: FC = () => {
     setPreview(url);
   };
 
-  // прибираємо objectURL щоб не було витоку пам’яті
   useEffect(() => {
     return () => {
       if (preview) URL.revokeObjectURL(preview);
