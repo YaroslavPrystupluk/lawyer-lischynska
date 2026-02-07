@@ -5,3 +5,4 @@ export const PAGE_SIZE = 12;
 export const PAGE_WINDOW = 4;
 export const PAGE_PARAM = "page";
 export const STORAGE_KEY = "blog_current_page";
+export const IMAGE_COLLECTION = "postsImg";

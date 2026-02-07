@@ -1,19 +1,33 @@
-import {useMutation} from "@tanstack/react-query";
-import {createPost, deletePost, editPosts} from "../../services/blogService.ts";
-import {Post} from "../../types/types.ts";
+import { useMutation } from "@tanstack/react-query";
+import {
+  addImage,
+  createPost,
+  deletePost,
+  editPosts,
+} from "../../services/blogService.ts";
+import { Post } from "../../types/types.ts";
 
-export const useCreatePost = (data: Post) => {
-    return useMutation({
-        mutationFn: () => createPost(data)
-    })
-}
-export const useEditPost = (id: Post['id'], data: Post) => {
-    return useMutation({
-        mutationFn: () => editPosts(id, data),
-    })
-}
-export const useDeletePost = (id: Post['id']) => {
-    return useMutation({
-        mutationFn: () => deletePost(id),
-    })
-}
+export const useCreatePost = () => {
+  return useMutation({
+    mutationFn: (data: Omit<Post, "id">) => createPost(data),
+  });
+};
+
+export const useEditPost = () => {
+  return useMutation({
+    mutationFn: ({ id, data }: { id: Post["id"]; data: Partial<Post> }) =>
+      editPosts(id, data),
+  });
+};
+
+export const useDeletePost = () => {
+  return useMutation({
+    mutationFn: (id: Post["id"]) => deletePost(id),
+  });
+};
+
+export const useAddImage = () => {
+  return useMutation({
+    mutationFn: (file: Blob | Uint8Array | ArrayBuffer) => addImage(file),
+  });
+};

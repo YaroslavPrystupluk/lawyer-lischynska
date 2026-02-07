@@ -10,7 +10,7 @@ export type Post = {
   img: string;
   title: string;
   description: string;
-  createDateAt: Date;
+  createDateAt?: Date;
   category: string;
 };
 

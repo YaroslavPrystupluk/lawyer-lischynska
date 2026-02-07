@@ -8,7 +8,7 @@ import { useBlogPagination } from "../../hooks/useBlogPagination";
 import { BLOG_SITE_URL } from "../../constants/blog";
 import { useAuth } from "../../hooks/useAuth.ts";
 import { Link } from "react-router-dom";
-import { ADMIN_ROUTES } from "../../routes/routes.name.ts";
+import { COMMON_ROUTES } from "../../routes/routes.name.ts";
 
 const Blog: FC = () => {
   const { isAuthenticated } = useAuth();
@@ -49,7 +49,7 @@ const Blog: FC = () => {
       {!loading && totalCount > 0 && (
         <>
           {isAuthenticated && (
-            <Link to={`/${ADMIN_ROUTES.ROOT}/${ADMIN_ROUTES.CREATE_POST}`}>
+            <Link to={`/${COMMON_ROUTES.CREATE_POST}`}>
               <button className="text-cyan-50 bg-primary border-0 mb-6 py-2 px-6 focus:outline-none hover:bg-primary/80 rounded text-lg">
                 Додати пост
               </button>

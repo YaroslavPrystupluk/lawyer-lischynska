@@ -10,7 +10,7 @@ import {
   ServicesDocumentation,
   ServicesSupport,
 } from "../pages/common";
-import CreatePost from "../pages/admin/CreatePost.tsx";
+import CreatePost from "../pages/common/CreatePost.tsx";
 import AdminGuard from "../components/Guard/AdminGuard.tsx";
 
 export default [
