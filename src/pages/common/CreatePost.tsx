@@ -41,8 +41,6 @@ const CreatePost: FC = () => {
         category: "business",
       };
 
-      console.log(payload);
-
       await createPostMutation.mutateAsync(payload);
     },
     [addImageMutation, createPostMutation, user],
@@ -121,6 +119,7 @@ const CreatePost: FC = () => {
         <button
           type="submit"
           className="text-cyan-50 bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary/80 rounded text-lg relative left-[50%] translate-x-[-50%]"
+          disabled={createPostMutation.isPending}
         >
           Створити пост
         </button>
