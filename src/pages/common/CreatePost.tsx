@@ -79,15 +79,22 @@ const CreatePost: FC = () => {
       </button>
       <form className="w-2/3 m-auto" onSubmit={handleSubmit}>
         <input
+          hidden
           id="img"
           name="image"
           type="file"
           required
-          className="mb-6"
           accept="image/*"
           ref={refImage}
           onChange={onImageChange}
         />
+        <button
+          type="button"
+          className="text-cyan-50 bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary/80 rounded text-lg my-6"
+          onClick={() => refImage.current?.click()}
+        >
+          Завантажити файл
+        </button>
         {preview && (
           <img
             src={preview}
@@ -111,7 +118,12 @@ const CreatePost: FC = () => {
           required
           ref={refDescription}
         />
-        <button type="submit">Створити пост</button>
+        <button
+          type="submit"
+          className="text-cyan-50 bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary/80 rounded text-lg relative left-[50%] translate-x-[-50%]"
+        >
+          Створити пост
+        </button>
       </form>
     </div>
   );
