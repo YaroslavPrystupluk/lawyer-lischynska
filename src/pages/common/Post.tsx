@@ -24,7 +24,7 @@ const Post: FC = () => {
       if (!post) return;
       await deleteImageMutation.mutateAsync(post.img);
       await deletePostMutation.mutateAsync(post.id);
-      navigate(COMMON_ROUTES.BLOG);
+      navigate(`/${COMMON_ROUTES.BLOG}`);
     },
     [deleteImageMutation, deletePostMutation, navigate],
   );
@@ -100,17 +100,19 @@ const Post: FC = () => {
       <a href="tel:+380982592599">0982592599</a>
 
       {/* Кнопка назад */}
-      <div className="mt-6">
+      <div className="mt-6 flex justify-between">
         <button
           onClick={() => navigate(-1)}
           className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80"
+          disabled={deleteImageMutation.isPending || deletePostMutation.isPending }
         >
           ← Назад
         </button>
         {isAuthenticated && (
           <button
             onClick={() => handleDelete(post)}
-            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80"
+            className="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-500"
+            disabled={deleteImageMutation.isPending || deletePostMutation.isPending }
           >
             Видалити
           </button>

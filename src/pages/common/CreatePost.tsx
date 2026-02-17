@@ -4,6 +4,7 @@ import TextArea from "../../components/TextArea/TextArea.tsx";
 import { useNavigate } from "react-router-dom";
 import { useAddImage, useCreatePost } from "../../api/posts/index.ts";
 import { useAuth } from "../../hooks/useAuth.ts";
+import {COMMON_ROUTES} from "../../routes/routes.name.ts";
 
 // const MAX_MB = 5;
 
@@ -41,9 +42,13 @@ const CreatePost: FC = () => {
         category: "business",
       };
 
-      await createPostMutation.mutateAsync(payload);
+      await createPostMutation.mutateAsync(payload, {
+          onSuccess: () => {
+              navigate(`/${COMMON_ROUTES.BLOG}`)
+          }
+      });
     },
-    [addImageMutation, createPostMutation, user],
+    [addImageMutation, createPostMutation, navigate, user],
   );
 
   const onImageChange = () => {

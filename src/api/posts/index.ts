@@ -32,7 +32,6 @@ export const useAddImage = () => {
     mutationFn: (file: Blob | Uint8Array | ArrayBuffer) => addImage(file),
   });
 };
-
 export const useDeleteImage = () => {
   return useMutation({
     mutationFn: (imgUrl: string) => deleteImage(imgUrl),

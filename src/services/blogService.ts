@@ -1,4 +1,4 @@
-import { db, storage } from "../firebase/firebaseConfig";
+import {db, storage} from "../firebase/firebaseConfig";
 import {
   addDoc,
   collection,
@@ -16,26 +16,14 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-import {
-  POSTS_COLLECTION,
-  DATE_FIELD,
-  PAGE_SIZE,
-  IMAGE_COLLECTION,
-} from "../constants/blog";
-import type { Post } from "../types/types";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from "firebase/storage";
+import {DATE_FIELD, IMAGE_COLLECTION, PAGE_SIZE, POSTS_COLLECTION,} from "../constants/blog";
+import type {Post} from "../types/types";
+import {deleteObject, getDownloadURL, ref, uploadBytes,} from "firebase/storage";
 
 export type PageCursor = QueryDocumentSnapshot<DocumentData> | null;
 
 const collRef = collection(db, POSTS_COLLECTION);
 
-const id = crypto.randomUUID();
-const imgRef = ref(storage, `${IMAGE_COLLECTION}/image-${Date.now()}-${id}`);
 
 export const getTotalPostsCount = async (): Promise<number> => {
   const agg = await getCountFromServer(collRef);
@@ -90,12 +78,14 @@ export const deletePost = async (id: Post["id"]): Promise<void> => {
 };
 
 export const addImage = async (image: Blob | Uint8Array | ArrayBuffer) => {
+
+  const id = crypto.randomUUID();
+  const imgRef = ref(storage, `${IMAGE_COLLECTION}/image-${Date.now()}-${id}`);
   await uploadBytes(imgRef, image);
-  const imgUrl = await getDownloadURL(imgRef);
-  return imgUrl;
+  return await getDownloadURL(imgRef);
 };
 
 export const deleteImage = async (imgUrl: string) => {
-  const postImg = ref(storage, imgUrl);
-  deleteObject(postImg);
+  const deleteImgRef = ref(storage, imgUrl);
+  return await deleteObject(deleteImgRef);
 };
