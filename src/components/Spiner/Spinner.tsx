@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-const Spiner: FC = () => {
+const Spinner: FC = () => {
   return (
     <div className="flex justify-center items-center h-[100vh]">
       <div
@@ -15,4 +15,4 @@ const Spiner: FC = () => {
   );
 };
 
-export default Spiner;
+export default Spinner;

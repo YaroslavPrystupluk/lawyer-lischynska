@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 import type { Post } from "../../types/types";
-import Spiner from "../../components/Spiner/Spiner";
+import Spinner from "../../components/Spiner/Spinner.tsx";
 import { useAuth } from "../../hooks/useAuth";
 import { useDeleteImage, useDeletePost } from "../../api/posts";
 import { COMMON_ROUTES } from "../../routes/routes.name";
@@ -62,7 +62,7 @@ const Post: FC = () => {
   }, [id]);
 
   if (loading) {
-    return <Spiner />;
+    return <Spinner />;
   }
 
   if (err || !post) {

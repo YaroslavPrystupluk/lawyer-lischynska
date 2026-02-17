@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useLogout } from "../../../../api/auth";
 import { COMMON_ROUTES } from "../../../../routes/routes.name";
 import { useAuth } from "../../../../hooks/useAuth";
-import Spiner from "../../../Spiner/Spiner";
+import Spinner from "../../../Spiner/Spinner.tsx";
 
 const Navbar: FC = () => {
   const { isAuthenticated, loading } = useAuth();
@@ -25,7 +25,7 @@ const Navbar: FC = () => {
       },
     });
   };
-  if (loading) return <Spiner />;
+  if (loading) return <Spinner />;
   return (
     <Disclosure as="nav">
       <div className="mx-auto max-w-8xl px-2 sm:px-4 lg:px-8 relative flex items-center justify-between">

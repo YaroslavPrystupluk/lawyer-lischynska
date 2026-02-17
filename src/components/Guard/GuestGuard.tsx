@@ -2,7 +2,7 @@ import { FC, PropsWithChildren } from "react";
 import {Navigate, Outlet} from "react-router-dom";
 import { COMMON_ROUTES } from "../../routes/routes.name";
 import { useAuth } from "../../hooks/useAuth";
-import Spiner from "../Spiner/Spiner";
+import Spinner from "../Spiner/Spinner.tsx";
 
 type GuestGuardProps = PropsWithChildren<{ redirectTo?: string }>;
 
@@ -11,7 +11,7 @@ const GuestGuard: FC<GuestGuardProps> = ({
 }) => {
   const { isAuthenticated, loading } = useAuth();
 
-  if (loading) return <Spiner />;
+  if (loading) return <Spinner />;
   return isAuthenticated ? (
     <Navigate to={redirectTo} replace />
   ) : (

@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import Spiner from "../../components/Spiner/Spiner";
+import Spinner from "../../components/Spiner/Spinner.tsx";
 import { Prices } from "../../types/types";
 import TitleChapter from "../../components/TitleChapter/TitleChapter";
 import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
@@ -51,7 +51,7 @@ const Pricing: FC = () => {
 
         {loading && (
             <div className="text-center text-gray-500 py-8">
-                <Spiner />
+                <Spinner />
             </div>
         )}
 

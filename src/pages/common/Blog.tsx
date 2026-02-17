@@ -1,6 +1,6 @@
 import { FC } from "react";
 import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
-import Spiner from "../../components/Spiner/Spiner.tsx";
+import Spinner from "../../components/Spiner/Spinner.tsx";
 import { BlogHeader } from "../../components/Blog/BlogHeader";
 import { PostsGrid } from "../../components/Blog/PostsGrid";
 import { Pagination } from "../../components/Blog/Pagination";
@@ -38,7 +38,7 @@ const Blog: FC = () => {
 
       <BlogHeader />
 
-      {loading && <Spiner />}
+      {loading && <Spinner />}
 
       {!loading && totalCount === 0 && (
         <p className="text-slate-500 text-center mt-12">
