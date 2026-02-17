@@ -2,7 +2,7 @@ import { FC, useCallback, useEffect, useRef, useState } from "react";
 import Input from "../../components/Input/Input.tsx";
 import TextArea from "../../components/TextArea/TextArea.tsx";
 import { useNavigate } from "react-router-dom";
-import { useAddImage, useCreatePost } from "../../api/posts/index.ts";
+import { useAddImage, useCreatePost } from "../../api/posts";
 import { useAuth } from "../../hooks/useAuth.ts";
 import {COMMON_ROUTES} from "../../routes/routes.name.ts";
 
