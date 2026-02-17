@@ -23,7 +23,12 @@ import {
   IMAGE_COLLECTION,
 } from "../constants/blog";
 import type { Post } from "../types/types";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 
 export type PageCursor = QueryDocumentSnapshot<DocumentData> | null;
 
@@ -88,4 +93,9 @@ export const addImage = async (image: Blob | Uint8Array | ArrayBuffer) => {
   await uploadBytes(imgRef, image);
   const imgUrl = await getDownloadURL(imgRef);
   return imgUrl;
+};
+
+export const deleteImage = async (imgUrl: string) => {
+  const postImg = ref(storage, imgUrl);
+  deleteObject(postImg);
 };

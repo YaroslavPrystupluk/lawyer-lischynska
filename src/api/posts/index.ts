@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import {
   addImage,
   createPost,
+  deleteImage,
   deletePost,
   editPosts,
 } from "../../services/blogService.ts";
@@ -29,5 +30,11 @@ export const useDeletePost = () => {
 export const useAddImage = () => {
   return useMutation({
     mutationFn: (file: Blob | Uint8Array | ArrayBuffer) => addImage(file),
+  });
+};
+
+export const useDeleteImage = () => {
+  return useMutation({
+    mutationFn: (imgUrl: string) => deleteImage(imgUrl),
   });
 };
