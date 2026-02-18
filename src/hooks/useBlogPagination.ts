@@ -17,7 +17,7 @@ import {
   fetchPostsPage,
   getTotalPostsCount,
   PageCursor,
-} from "../services/blogService";
+} from "../services/postsService.ts";
 import type { Post } from "../types/types";
 
 export const useBlogPagination = () => {

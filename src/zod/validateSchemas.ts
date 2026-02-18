@@ -22,17 +22,26 @@ export const loginFormSchema = z.object({
 })
 
 export const postFormSchema = z.object({
-    // image: z.object({
-    //     url: z.url()
-    //
-    // }),
-    name: z
+    title: z
         .string()
         .min(3, "Заголовок має містити мінімум 3 символи").trim(),
 
-    message: z
+    description: z
         .string()
         .min(3, "Повідомлення має містити мінімум 3 символа").trim(),
+
+    // category: z
+    //     .string()
+    //     .min(3, "Виберіть категорію").trim(),
+
+    file: z
+        .instanceof(File, { message: "Файл обов'язковий" })
+        .refine((file) => file.size <= 5 * 1024 * 1024, {
+            message: "Максимальний розмір файлу 5MB",
+        })
+        .refine((file) => ["image/jpeg", "image/png", "image/webp"].includes(file.type), {
+            message: "Дозволені тільки зображення (jpg, png, webp)",
+        }),
 })
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;

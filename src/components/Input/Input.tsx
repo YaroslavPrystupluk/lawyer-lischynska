@@ -2,7 +2,7 @@ import { type ComponentPropsWithoutRef, forwardRef } from "react";
 
 type InputProps = {
   id: string;
-  label: string;
+  label?: string;
   classNameLabel?: string;
   classNameInput?: string;
   error?: string;

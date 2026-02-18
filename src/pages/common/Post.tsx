@@ -1,11 +1,9 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback} from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebaseConfig";
 import type { Post } from "../../types/types";
 import Spinner from "../../components/Spiner/Spinner.tsx";
 import { useAuth } from "../../hooks/useAuth";
-import { useDeleteImage, useDeletePost } from "../../api/posts";
+import {useDeleteImage, useDeletePost, useShowPost} from "../../api/posts";
 import { COMMON_ROUTES } from "../../routes/routes.name";
 
 const Post: FC = () => {
@@ -14,10 +12,7 @@ const Post: FC = () => {
   const { isAuthenticated } = useAuth();
   const deleteImageMutation = useDeleteImage();
   const deletePostMutation = useDeletePost();
-
-  const [post, setPost] = useState<Post | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState<string | null>(null);
+  const { data: post, isPending, isError} = useShowPost(id ?? '')
 
   const handleDelete = useCallback(
     async (post: Post) => {
@@ -29,46 +24,14 @@ const Post: FC = () => {
     [deleteImageMutation, deletePostMutation, navigate],
   );
 
-  useEffect(() => {
-    let isMounted = true;
-
-    const load = async () => {
-      if (!id) return;
-      setLoading(true);
-      setErr(null);
-      try {
-        const ref = doc(db, "posts", id);
-        const snap = await getDoc(ref);
-        if (!snap.exists()) {
-          if (isMounted) {
-            setPost(null);
-            setErr("Пост не знайдено");
-          }
-          return;
-        }
-        const data = snap.data() as Omit<Post, "id">;
-        if (isMounted) setPost({ id: snap.id, ...data });
-      } catch (e: any) {
-        if (isMounted) setErr(e.message ?? "Помилка завантаження");
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
-
-    load();
-    return () => {
-      isMounted = false;
-    };
-  }, [id]);
-
-  if (loading) {
+  if (isPending) {
     return <Spinner />;
   }
 
-  if (err || !post) {
+  if (isError) {
     return (
       <div className="max-w-3xl mx-auto text-center text-slate-600 mt-10">
-        {err ?? "Пост не знайдено"}
+        {isError ?? "Помилка завантаження"}
         <div className="mt-6">
           <button
             onClick={() => navigate(-1)}

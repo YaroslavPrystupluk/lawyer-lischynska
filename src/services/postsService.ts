@@ -6,6 +6,7 @@ import {
   doc,
   DocumentData,
   getCountFromServer,
+  getDoc,
   getDocs,
   limit,
   orderBy,
@@ -57,11 +58,34 @@ export const fetchPostsPage = async (
   return { posts, nextCursor };
 };
 
-export const createPost = async (post: Omit<Post, "id">) => {
-  return addDoc(collection(db, "posts"), {
-    ...post,
-    createDateAt: serverTimestamp(),
-  });
+export const showPost = async (id: Post['id']): Promise<Post & { id: string }> => {
+  const postRef = doc(collRef, id);
+  const snap = await getDoc(postRef);
+
+  if (!snap.exists()) throw new Error("Пост не знайдено");
+
+  const data = snap.data() as Omit<Post, 'id'>;
+
+  return { id: snap.id, ...data };
+}
+
+export const postsService = {
+  createPostWithImage: async (post: Omit<Post, "id"> & { img: Blob | Uint8Array | ArrayBuffer }) => {
+    let imageUrl: string | undefined = undefined;
+
+    if (post.img) {
+      const id = crypto.randomUUID();
+      const imgRef = ref(storage, `${IMAGE_COLLECTION}/image-${Date.now()}-${id}`);
+      await uploadBytes(imgRef, post.img);
+      imageUrl = await getDownloadURL(imgRef);
+    }
+
+    return await addDoc(collRef, {
+      ...post,
+      img: imageUrl,
+      createDateAt: serverTimestamp(),
+    });
+  },
 };
 
 export const editPosts = async (
@@ -77,13 +101,7 @@ export const deletePost = async (id: Post["id"]): Promise<void> => {
   await deleteDoc(postDoc);
 };
 
-export const addImage = async (image: Blob | Uint8Array | ArrayBuffer) => {
 
-  const id = crypto.randomUUID();
-  const imgRef = ref(storage, `${IMAGE_COLLECTION}/image-${Date.now()}-${id}`);
-  await uploadBytes(imgRef, image);
-  return await getDownloadURL(imgRef);
-};
 
 export const deleteImage = async (imgUrl: string) => {
   const deleteImgRef = ref(storage, imgUrl);

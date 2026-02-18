@@ -7,16 +7,21 @@ import {QueryClientProvider, QueryClient} from "@tanstack/react-query"
 
 import "./firebase/firebaseConfig";
 import "./index.css";
+import {NotificationProvider} from "./context/NotificationProvider.tsx";
+
+
 
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
+        <NotificationProvider>
         <QueryClientProvider client={queryClient}>
         <HelmetProvider>
             <JsonLd/>
             <AppRouter/>
         </HelmetProvider>
         </QueryClientProvider>
+        </NotificationProvider>
     </StrictMode>
 );

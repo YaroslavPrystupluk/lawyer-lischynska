@@ -7,7 +7,7 @@ export type Prices = {
 export type Post = {
   id: string;
   userId: string;
-  img: string;
+  img: File;
   title: string;
   description: string;
   createDateAt?: Date;
