@@ -1,4 +1,4 @@
-import {db, storage} from "../firebase/firebaseConfig";
+import { db, storage } from "../firebase/firebaseConfig";
 import {
   addDoc,
   collection,
@@ -17,14 +17,23 @@ import {
   updateDoc,
 } from "firebase/firestore";
 
-import {DATE_FIELD, IMAGE_COLLECTION, PAGE_SIZE, POSTS_COLLECTION,} from "../constants/blog";
-import type {Post} from "../types/types";
-import {deleteObject, getDownloadURL, ref, uploadBytes,} from "firebase/storage";
+import {
+  DATE_FIELD,
+  IMAGE_COLLECTION,
+  PAGE_SIZE,
+  POSTS_COLLECTION,
+} from "../constants/blog";
+import type { Post, PostRequestDTO } from "../types/types";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from "firebase/storage";
 
 export type PageCursor = QueryDocumentSnapshot<DocumentData> | null;
 
 const collRef = collection(db, POSTS_COLLECTION);
-
 
 export const getTotalPostsCount = async (): Promise<number> => {
   const agg = await getCountFromServer(collRef);
@@ -58,24 +67,18 @@ export const fetchPostsPage = async (
   return { posts, nextCursor };
 };
 
-export const showPost = async (id: Post['id']): Promise<Post & { id: string }> => {
-  const postRef = doc(collRef, id);
-  const snap = await getDoc(postRef);
-
-  if (!snap.exists()) throw new Error("Пост не знайдено");
-
-  const data = snap.data() as Omit<Post, 'id'>;
-
-  return { id: snap.id, ...data };
-}
-
 export const postsService = {
-  createPostWithImage: async (post: Omit<Post, "id"> & { img: Blob | Uint8Array | ArrayBuffer }) => {
+  createPostWithImage: async (
+    post: Omit<PostRequestDTO, "id"> & { img: Blob | Uint8Array | ArrayBuffer },
+  ) => {
     let imageUrl: string | undefined = undefined;
 
     if (post.img) {
       const id = crypto.randomUUID();
-      const imgRef = ref(storage, `${IMAGE_COLLECTION}/image-${Date.now()}-${id}`);
+      const imgRef = ref(
+        storage,
+        `${IMAGE_COLLECTION}/image-${Date.now()}-${id}`,
+      );
       await uploadBytes(imgRef, post.img);
       imageUrl = await getDownloadURL(imgRef);
     }
@@ -86,24 +89,31 @@ export const postsService = {
       createDateAt: serverTimestamp(),
     });
   },
-};
+  showPost: async (id: Post["id"]): Promise<Post & { id: string }> => {
+    const postRef = doc(collRef, id);
+    const snap = await getDoc(postRef);
 
-export const editPosts = async (
-  id: Post["id"],
-  edit: Partial<Omit<Post, "id">>,
-): Promise<void> => {
-  const postDoc = doc(collRef, id);
-  await updateDoc(postDoc, edit);
-};
+    if (!snap.exists()) throw new Error("Пост не знайдено");
 
-export const deletePost = async (id: Post["id"]): Promise<void> => {
-  const postDoc = doc(collRef, id);
-  await deleteDoc(postDoc);
-};
+    const data = snap.data() as Omit<Post, "id">;
 
+    return { id: snap.id, ...data };
+  },
+  editPostsWithImage: async (
+    id: Post["id"],
+    edit: Partial<Omit<PostRequestDTO, "id">>,
+  ) => {
+    const postDoc = doc(collRef, id);
+    await updateDoc(postDoc, edit);
+  },
 
-
-export const deleteImage = async (imgUrl: string) => {
-  const deleteImgRef = ref(storage, imgUrl);
-  return await deleteObject(deleteImgRef);
+  deletePostWithImage: async (
+    id: Post["id"],
+    imgUrl: string,
+  ): Promise<void> => {
+    const postDoc = doc(collRef, id);
+    const deleteImgRef = ref(storage, imgUrl);
+    await deleteDoc(postDoc);
+    await deleteObject(deleteImgRef);
+  },
 };

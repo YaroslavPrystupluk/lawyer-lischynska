@@ -1,30 +1,49 @@
-import { FC, useCallback} from "react";
+import { FC, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import type { Post } from "../../types/types";
 import Spinner from "../../components/Spiner/Spinner.tsx";
 import { useAuth } from "../../hooks/useAuth";
-import {useDeleteImage, useDeletePost, useShowPost} from "../../api/posts";
+import { useDeletePostWithImage, useShowPost } from "../../api/posts";
 import { COMMON_ROUTES } from "../../routes/routes.name";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNotifications } from "../../hooks/useNotifications.ts";
 
 const Post: FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { isAuthenticated } = useAuth();
-  const deleteImageMutation = useDeleteImage();
-  const deletePostMutation = useDeletePost();
-  const { data: post, isPending, isError} = useShowPost(id ?? '')
+  const deletePostWithImageMutation = useDeletePostWithImage();
+  const { data: post, isPending, isError } = useShowPost(id ?? "");
+  const queryClient = useQueryClient();
+  const { showNotification } = useNotifications();
 
   const handleDelete = useCallback(
     async (post: Post) => {
       if (!post) return;
-      await deleteImageMutation.mutateAsync(post.img);
-      await deletePostMutation.mutateAsync(post.id);
-      navigate(`/${COMMON_ROUTES.BLOG}`);
+
+      const payload = {
+        id: post.id,
+        imgUrl: post.img,
+      };
+
+      await deletePostWithImageMutation.mutateAsync(payload, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["posts"] });
+          showNotification("success", "Пост успішно видалений");
+          navigate(`/${COMMON_ROUTES.BLOG}`);
+        },
+        onError(error) {
+          showNotification(
+            "danger",
+            `При видаленні сталася помилка || ${error.message}`,
+          );
+        },
+      });
     },
-    [deleteImageMutation, deletePostMutation, navigate],
+    [deletePostWithImageMutation, navigate, queryClient, showNotification],
   );
 
-  if (isPending) {
+  if (deletePostWithImageMutation.isPending || isPending) {
     return <Spinner />;
   }
 
@@ -62,12 +81,11 @@ const Post: FC = () => {
       <span>моб. тел. </span>
       <a href="tel:+380982592599">0982592599</a>
 
-      {/* Кнопка назад */}
       <div className="mt-6 flex justify-between">
         <button
           onClick={() => navigate(-1)}
           className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80"
-          disabled={deleteImageMutation.isPending || deletePostMutation.isPending }
+          disabled={deletePostWithImageMutation.isPending}
         >
           ← Назад
         </button>
@@ -75,7 +93,7 @@ const Post: FC = () => {
           <button
             onClick={() => handleDelete(post)}
             className="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-500"
-            disabled={deleteImageMutation.isPending || deletePostMutation.isPending }
+            disabled={deletePostWithImageMutation.isPending}
           >
             Видалити
           </button>

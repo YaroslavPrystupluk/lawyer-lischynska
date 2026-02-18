@@ -7,11 +7,15 @@ export type Prices = {
 export type Post = {
   id: string;
   userId: string;
-  img: File;
+  img: string;
   title: string;
   description: string;
   createDateAt?: Date;
   category: string;
+};
+
+export type PostRequestDTO = Omit<Post, "img"> & {
+  img: File;
 };
 
 export type Authorisation = {
