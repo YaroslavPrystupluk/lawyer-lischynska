@@ -11,7 +11,7 @@ import {useNotifications} from "../../hooks/useNotifications.ts";
 import {PostFormData, postFormSchema} from "../../zod/validateSchemas.ts";
 
 
-const MAX_MB = 5 * 1024 *1024;
+const MAX_MB = 5 * 1024 * 1024;
 type FormErrors = Partial<Record<keyof PostFormData, string>>;
 
 const CreatePost: FC = () => {
@@ -29,7 +29,7 @@ const CreatePost: FC = () => {
     const refCategory = useRef<HTMLSelectElement>(null)
 
     const clearFieldError = (field: keyof PostFormData) => {
-        setErrors((prev) => ({ ...prev, [field]: undefined }));
+        setErrors((prev) => ({...prev, [field]: undefined}));
     };
 
     const handleSubmit = useCallback(
@@ -41,25 +41,6 @@ const CreatePost: FC = () => {
             const title = refTitle.current?.value?.trim() ?? "";
             const description = refDescription.current?.value?.trim() ?? "";
             const category = refCategory.current?.value.trim() ?? "";
-            if (!file ) {
-                showNotification('danger', "Поле є обов'язковим. Завантажте картинку")
-                return
-            }
-            if (file.size > MAX_MB) {
-                showNotification('danger', 'Можна завантажувати зображення до 5Mb')
-                return
-            }
-            if (!file.type.startsWith("image/")) {
-                showNotification('danger', 'Можна завантажувати лише зображення')
-                return;
-            }
-            const payload = {
-                title,
-                description,
-                img: file,
-                userId: user.uid,
-                category: "business",
-            }
 
             const validation = postFormSchema.safeParse({title, description, category, file});
             if (!validation.success) {
@@ -73,6 +54,27 @@ const CreatePost: FC = () => {
                 setErrors(newErrors);
                 return;
             }
+
+            if (!file) {
+                showNotification('danger', "Поле є обов'язковим. Завантажте картинку")
+                return
+            }
+            if (file?.size > MAX_MB) {
+                showNotification('danger', 'Можна завантажувати зображення до 5Mb')
+                return
+            }
+            if (!file?.type.startsWith("image/")) {
+                showNotification('danger', 'Можна завантажувати лише зображення')
+                return;
+            }
+            const payload = {
+                title,
+                description,
+                img: file,
+                userId: user.uid,
+                category: "business",
+            }
+
 
             await createPostWithImageMutation.mutateAsync(payload, {
                 onSuccess: () => {
@@ -93,7 +95,7 @@ const CreatePost: FC = () => {
         if (!file) return;
 
         if (!file.type.startsWith("image/")) {
-            alert("Тільки картинки");
+            showNotification('danger', 'Можна завантажувати лише зображення')
             refImage.current!.value = "";
             setPreview(null);
             return;
@@ -119,19 +121,9 @@ const CreatePost: FC = () => {
                 ← Назад
             </button>
             <form className="w-2/3 m-auto" onSubmit={handleSubmit}>
-                <Input
-                    hidden
-                    id="img"
-                    name="img"
-                    type="file"
-                     accept="image/*"
-                    ref={refImage}
-                    onChange={onImageChange}
-                    error={errors.file}
-                />
                 <button
                     type="button"
-                    className="text-cyan-50 bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary/80 rounded text-lg my-6"
+                    className="text-cyan-50 bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary/80 rounded text-lg my-2"
                     onClick={() => refImage.current?.click()}
                 >
                     Завантажити файл
@@ -143,6 +135,17 @@ const CreatePost: FC = () => {
                         className="mt-4 max-h-24 rounded-lg object-cover"
                     />
                 )}
+                <Input
+                    hidden
+                    id="img"
+                    name="img"
+                    type="file"
+                    accept="image/*"
+                    ref={refImage}
+                    onChange={onImageChange}
+                    error={errors.file}
+                />
+
                 <Input
                     label="Заголовок"
                     id="title"
