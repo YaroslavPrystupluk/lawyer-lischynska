@@ -101,10 +101,30 @@ export const postsService = {
   },
   editPostsWithImage: async (
     id: Post["id"],
-    edit: Partial<Omit<PostRequestDTO, "id">>,
+    post: Partial<Omit<PostRequestDTO, "id">>,
   ) => {
     const postDoc = doc(collRef, id);
-    await updateDoc(postDoc, edit);
+
+    const oldSnap = await getDoc(postDoc);
+    const oldData = oldSnap.data() as Post | undefined;
+
+    let imageUrl: string | undefined = undefined;
+
+    if (post.img) {
+      const id = crypto.randomUUID();
+      const imgRef = ref(
+          storage,
+          `${IMAGE_COLLECTION}/image-${Date.now()}-${id}`,
+      )
+      await uploadBytes(imgRef, post.img);
+      imageUrl = await getDownloadURL(imgRef);
+
+      if (oldData?.img) {
+        const oldImgRef = ref(storage, oldData.img);
+        await deleteObject(oldImgRef);
+      }
+    }
+     return  await updateDoc(postDoc, {...post,  img: imageUrl,});
   },
 
   deletePostWithImage: async (
