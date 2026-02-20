@@ -89,6 +89,7 @@ export const postsService = {
       createDateAt: serverTimestamp(),
     });
   },
+
   showPost: async (id: Post["id"]): Promise<Post & { id: string }> => {
     const postRef = doc(collRef, id);
     const snap = await getDoc(postRef);
@@ -99,12 +100,29 @@ export const postsService = {
 
     return { id: snap.id, ...data };
   },
+
   editPostsWithImage: async (
     id: Post["id"],
-    edit: Partial<Omit<PostRequestDTO, "id">>,
+    post: Partial<Omit<Post, "id">> & {
+      img: Blob | Uint8Array | ArrayBuffer;
+    },
+    newImage?: File,
   ) => {
     const postDoc = doc(collRef, id);
-    await updateDoc(postDoc, edit);
+    const deleteImgRef = ref(storage, post.img);
+    let imageUrl: string | undefined = undefined;
+
+    if (newImage) {
+      if (post.img) await deleteObject(deleteImgRef);
+    }
+    const imgRef = ref(
+      storage,
+      `${IMAGE_COLLECTION}/image-${Date.now()}-${id}`,
+    );
+    await uploadBytes(imgRef, post.img);
+    imageUrl = await getDownloadURL(imgRef);
+
+    await updateDoc(postDoc, { ...post, img: imageUrl });
   },
 
   deletePostWithImage: async (
@@ -113,7 +131,13 @@ export const postsService = {
   ): Promise<void> => {
     const postDoc = doc(collRef, id);
     const deleteImgRef = ref(storage, imgUrl);
+    const snap = await getDoc(postDoc);
+
+    if (!snap.exists()) return;
+
+    const data = snap.data();
+    if (data.img) await deleteObject(deleteImgRef);
+
     await deleteDoc(postDoc);
-    await deleteObject(deleteImgRef);
   },
 };

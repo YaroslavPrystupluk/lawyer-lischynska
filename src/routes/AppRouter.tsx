@@ -20,6 +20,7 @@ import type { ReactElement } from "react";
 import CreatePost from "../pages/common/CreatePost.tsx";
 import Login from "../pages/admin/Login.tsx";
 import AdminGuard from "../components/Guard/AdminGuard.tsx";
+import EditPost from "../pages/common/EditPost.tsx";
 
 const router = createBrowserRouter([
   {
@@ -37,9 +38,7 @@ const router = createBrowserRouter([
         element: <AdminGuard />,
         children: [
           { path: COMMON_ROUTES.CREATE_POST, element: <CreatePost /> },
-
-          // приклад інших сторінок
-          // { path: "edit/:id", element: <EditPost /> },
+          { path: COMMON_ROUTES.EDIT_POST, element: <EditPost /> },
         ],
       },
     ],

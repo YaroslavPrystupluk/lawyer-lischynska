@@ -23,11 +23,15 @@ export const useEditPostWithImage = () => {
   return useMutation({
     mutationFn: ({
       id,
-      data,
+      post,
+      newImg,
     }: {
       id: Post["id"];
-      data: Partial<PostRequestDTO>;
-    }) => postsService.editPostsWithImage(id, data),
+      post: Omit<Post, "id"> & {
+        img: Blob | Uint8Array | ArrayBuffer;
+      };
+      newImg?: File;
+    }) => postsService.editPostsWithImage(id, post, newImg),
   });
 };
 

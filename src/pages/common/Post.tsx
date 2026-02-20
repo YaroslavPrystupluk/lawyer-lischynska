@@ -1,5 +1,5 @@
 import { FC, useCallback } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import type { Post } from "../../types/types";
 import Spinner from "../../components/Spiner/Spinner.tsx";
 import { useAuth } from "../../hooks/useAuth";
@@ -90,13 +90,21 @@ const Post: FC = () => {
           ← Назад
         </button>
         {isAuthenticated && (
-          <button
-            onClick={() => handleDelete(post)}
-            className="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-500"
-            disabled={deletePostWithImageMutation.isPending}
-          >
-            Видалити
-          </button>
+          <>
+            <Link
+              to={`/edit/${post.id}`}
+              className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-500"
+            >
+              Редагувати
+            </Link>
+            <button
+              onClick={() => handleDelete(post)}
+              className="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-500"
+              disabled={deletePostWithImageMutation.isPending}
+            >
+              Видалити
+            </button>
+          </>
         )}
       </div>
     </article>

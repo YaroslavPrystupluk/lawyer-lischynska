@@ -1,22 +1,21 @@
 import { FC, useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useCreatePostWithImage } from "../../api/posts";
-import { useAuth } from "../../hooks/useAuth.ts";
-import { COMMON_ROUTES } from "../../routes/routes.name.ts";
-import * as React from "react";
+import PostForm from "../../components/PostForm/PostForm";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNotifications } from "../../hooks/useNotifications.ts";
-import { PostFormData, postFormSchema } from "../../zod/validateSchemas.ts";
-import Spinner from "../../components/Spiner/Spinner.tsx";
-import PostForm from "../../components/PostForm/PostForm.tsx";
+import { useNavigate } from "react-router-dom";
+import { useEditPostWithImage } from "../../api/posts";
+import { useAuth } from "../../hooks/useAuth";
+import { useNotifications } from "../../hooks/useNotifications";
+import { COMMON_ROUTES } from "../../routes/routes.name";
+import Spinner from "../../components/Spiner/Spinner";
+import { PostFormData, postFormSchema } from "../../zod/validateSchemas";
 
 const MAX_MB = 5 * 1024 * 1024;
 type FormErrors = Partial<Record<keyof PostFormData, string>>;
 
-const CreatePost: FC = () => {
+const EditPost: FC = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const createPostWithImageMutation = useCreatePostWithImage();
+  const editPostWithImageMutation = useEditPostWithImage();
   const { user } = useAuth();
   const { showNotification } = useNotifications();
   const [errors, setErrors] = useState<FormErrors>({});
@@ -79,7 +78,7 @@ const CreatePost: FC = () => {
         category,
       };
 
-      await createPostWithImageMutation.mutateAsync(payload, {
+      await editPostWithImageMutation.mutateAsync(payload, {
         onSuccess: () => {
           showNotification("success", "Пост успішно створений");
           queryClient.invalidateQueries({ queryKey: ["posts"] });
@@ -93,16 +92,10 @@ const CreatePost: FC = () => {
         },
       });
     },
-    [
-      createPostWithImageMutation,
-      navigate,
-      queryClient,
-      showNotification,
-      user,
-    ],
+    [editPostWithImageMutation, navigate, queryClient, showNotification, user],
   );
 
-  if (createPostWithImageMutation.isPending) {
+  if (editPostWithImageMutation.isPending) {
     return <Spinner />;
   }
 
@@ -111,9 +104,9 @@ const CreatePost: FC = () => {
       handleSubmit={handleSubmit}
       errors={errors}
       setErrors={setErrors}
-      disabled={createPostWithImageMutation.isPending}
+      disabled={editPostWithImageMutation.isPending}
     />
   );
 };
 
-export default CreatePost;
+export default EditPost;
