@@ -106,7 +106,7 @@ const PostForm: FC<Props> = ({ handleSubmit, errors, setErrors, disabled }) => {
           className="text-cyan-50 bg-primary border-0 py-2 px-6 focus:outline-none hover:bg-primary/80 rounded text-lg relative left-[50%] translate-x-[-50%]"
           disabled={disabled}
         >
-          Створити пост
+          Зберегти
         </button>
       </form>
     </div>
