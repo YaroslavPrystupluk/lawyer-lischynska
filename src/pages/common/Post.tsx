@@ -1,6 +1,6 @@
 import { FC, useCallback } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import type { Post } from "../../types/types";
+import type { Post as PostType } from "../../types/types";
 import Spinner from "../../components/Spiner/Spinner.tsx";
 import { useAuth } from "../../hooks/useAuth";
 import { useDeletePostWithImage, useShowPost } from "../../api/posts";
@@ -18,7 +18,7 @@ const Post: FC = () => {
   const { showNotification } = useNotifications();
 
   const handleDelete = useCallback(
-    async (post: Post) => {
+    async (post: PostType) => {
       if (!post) return;
 
       const payload = {

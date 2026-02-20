@@ -1,10 +1,10 @@
 import { FC, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { Header } from "../components";
 import Footer from "../components/Footer/Footer";
 import ButtonFloatingAction from "../components/ButtonFloatingAction/ButtonFloatingAction ";
 import Modal from "../components/Modal/Modal.tsx";
 import FeedBackModal from "../components/Modal/ContentModal/FeedBackModal.tsx";
+import Header from "../components/Header/Header.tsx";
 
 const Layout: FC = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
