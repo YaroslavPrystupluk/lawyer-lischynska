@@ -7,6 +7,11 @@ import { useDeletePostWithImage, useShowPost } from "../../api/posts";
 import { COMMON_ROUTES } from "../../routes/routes.name";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNotifications } from "../../hooks/useNotifications.ts";
+import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
+import { buildArticleSchema } from "../../SEOHelpers/seoData.ts";
+import { toDateString } from "../../utils/firebaseDate.ts"; // ← новий імпорт
+
+const SITE_URL = "https://advocate-lishchynska.rivne.ua";
 
 const Post: FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -63,8 +68,31 @@ const Post: FC = () => {
     );
   }
 
+  const metaDescription =
+    post.description.length > 160
+      ? post.description.slice(0, 157) + "..."
+      : post.description;
+
+  const datePublished = toDateString(post.createDateAt); // ← без any, типізовано
+
   return (
     <article className="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+      <SEOHelper
+        title={post.title}
+        description={metaDescription}
+        keywords={`${post.category}, адвокат Рівне, юридична стаття`}
+        url={`${SITE_URL}/blog/${post.id}`}
+        image={post.img || `${SITE_URL}/og-image.jpg`}
+        ogType="article"
+        jsonLdData={buildArticleSchema({
+          title: post.title,
+          description: metaDescription,
+          slug: post.id,
+          datePublished,
+          image: post.img,
+        })}
+      />
+
       <div className="mb-4">
         <img
           src={post.img}

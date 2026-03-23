@@ -9,6 +9,7 @@ import { BLOG_SITE_URL } from "../../constants/blog";
 import { useAuth } from "../../hooks/useAuth.ts";
 import { Link } from "react-router-dom";
 import { COMMON_ROUTES } from "../../routes/routes.name.ts";
+import { blogListSchema } from "../../SEOHelpers/seoData.ts";
 
 const Blog: FC = () => {
   const { isAuthenticated } = useAuth();
@@ -34,6 +35,7 @@ const Blog: FC = () => {
         keywords="адвокат блог, юридичні статті, правова допомога"
         url={BLOG_SITE_URL}
         image={`${BLOG_SITE_URL}/images/og-image.png`}
+        jsonLdData={blogListSchema}
       />
 
       <BlogHeader />

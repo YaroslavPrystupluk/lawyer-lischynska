@@ -1,3 +1,5 @@
+import { FirebaseTimestamp } from "../utils/firebaseDate";
+
 export type Prices = {
   id: number;
   name: string;
@@ -10,7 +12,7 @@ export type Post = {
   img: string;
   title: string;
   description: string;
-  createDateAt?: Date;
+  createDateAt?: FirebaseTimestamp | Date;
   category: string;
 };
 
