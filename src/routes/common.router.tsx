@@ -10,6 +10,8 @@ import {
   ServicesDocumentation,
   ServicesSupport,
 } from "../pages/common";
+import CreatePost from "../pages/common/CreatePost.tsx";
+import AdminGuard from "../components/Guard/AdminGuard.tsx";
 
 export default [
   {
@@ -47,5 +49,13 @@ export default [
   {
     path: COMMON_ROUTES.POST,
     element: <Post />,
+  },
+  {
+    path: COMMON_ROUTES.CREATE_POST,
+    element: (
+      <AdminGuard>
+        <CreatePost />
+      </AdminGuard>
+    ),
   },
 ];

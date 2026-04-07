@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-interface SvgIconProps {
+type SvgIconProps = {
   icon: string;
   className?: string;
   size?: number;

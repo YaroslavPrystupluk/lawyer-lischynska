@@ -1,58 +1,61 @@
-import { FC, useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebaseConfig";
-import type { IPost } from "../../types/types";
-import Spiner from "../../components/Spiner/Spiner";
+import { FC, useCallback } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
+import type { Post as PostType } from "../../types/types";
+import Spinner from "../../components/Spiner/Spinner.tsx";
+import { useAuth } from "../../hooks/useAuth";
+import { useDeletePostWithImage, useShowPost } from "../../api/posts";
+import { COMMON_ROUTES } from "../../routes/routes.name";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNotifications } from "../../hooks/useNotifications.ts";
+import SEOHelper from "../../SEOHelpers/SEOHelper.tsx";
+import { buildArticleSchema } from "../../SEOHelpers/seoData.ts";
+import { toDateString } from "../../utils/firebaseDate.ts"; // ← новий імпорт
+
+const SITE_URL = "https://advocate-lishchynska.rivne.ua";
 
 const Post: FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
+  const deletePostWithImageMutation = useDeletePostWithImage();
+  const { data: post, isPending, isError } = useShowPost(id ?? "");
+  const queryClient = useQueryClient();
+  const { showNotification } = useNotifications();
 
-  const [post, setPost] = useState<IPost | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [err, setErr] = useState<string | null>(null);
+  const handleDelete = useCallback(
+    async (post: PostType) => {
+      if (!post) return;
 
-  useEffect(() => {
-    let isMounted = true;
+      const payload = {
+        id: post.id,
+        imgUrl: post.img,
+      };
 
-    const load = async () => {
-      if (!id) return;
-      setLoading(true);
-      setErr(null);
-      try {
-        const ref = doc(db, "posts", id);
-        const snap = await getDoc(ref);
-        if (!snap.exists()) {
-          if (isMounted) {
-            setPost(null);
-            setErr("Пост не знайдено");
-          }
-          return;
-        }
-        const data = snap.data() as Omit<IPost, "id">;
-        if (isMounted) setPost({ id: snap.id, ...data });
-      } catch (e: any) {
-        if (isMounted) setErr(e.message ?? "Помилка завантаження");
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
+      await deletePostWithImageMutation.mutateAsync(payload, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["posts"] });
+          showNotification("success", "Пост успішно видалений");
+          navigate(`/${COMMON_ROUTES.BLOG}`);
+        },
+        onError(error) {
+          showNotification(
+            "danger",
+            `При видаленні сталася помилка || ${error.message}`,
+          );
+        },
+      });
+    },
+    [deletePostWithImageMutation, navigate, queryClient, showNotification],
+  );
 
-    load();
-    return () => {
-      isMounted = false;
-    };
-  }, [id]);
-
-  if (loading) {
-    return <Spiner />;
+  if (deletePostWithImageMutation.isPending || isPending) {
+    return <Spinner />;
   }
 
-  if (err || !post) {
+  if (isError) {
     return (
       <div className="max-w-3xl mx-auto text-center text-slate-600 mt-10">
-        {err ?? "Пост не знайдено"}
+        {isError ?? "Помилка завантаження"}
         <div className="mt-6">
           <button
             onClick={() => navigate(-1)}
@@ -65,31 +68,72 @@ const Post: FC = () => {
     );
   }
 
+  const metaDescription =
+    post.description.length > 160
+      ? post.description.slice(0, 157) + "..."
+      : post.description;
+
+  const datePublished = toDateString(post.createDateAt); // ← без any, типізовано
+
   return (
-    <article className="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden">
-      <img
-        src={post.img}
-        alt={post.title}
-        className="w-full h-full sm:h-80 object-cover"
+    <article className="max-w-3xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+      <SEOHelper
+        title={post.title}
+        description={metaDescription}
+        keywords={`${post.category}, адвокат Рівне, юридична стаття`}
+        url={`${SITE_URL}/blog/${post.id}`}
+        image={post.img || `${SITE_URL}/og-image.jpg`}
+        ogType="article"
+        jsonLdData={buildArticleSchema({
+          title: post.title,
+          description: metaDescription,
+          slug: post.id,
+          datePublished,
+          image: post.img,
+        })}
       />
-      <div className="p-6">
+
+      <div className="mb-4">
+        <img
+          src={post.img}
+          alt={post.title}
+          className="float-right w-full h-full object-cover ml-4 mb-2 rounded-lg"
+        />
         <h1 className="text-3xl font-bold text-slate-900 mb-4">{post.title}</h1>
         <p className="text-slate-700 leading-relaxed whitespace-pre-line">
           {post.description}
         </p>
-        <p className="pt-4">З повагою, Адвокат Ліщинська Тетяна</p>
-        <span>моб. тел. </span>
-        <a href="tel:+380982592599">0982592599</a>
+      </div>
 
-        {/* Кнопка назад */}
-        <div className="mt-6">
-          <button
-            onClick={() => navigate(-1)}
-            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80"
-          >
-            ← Назад
-          </button>
-        </div>
+      <p className="pt-4">З повагою, Адвокат Ліщинська Тетяна</p>
+      <span>моб. тел. </span>
+      <a href="tel:+380982592599">0982592599</a>
+
+      <div className="mt-6 flex justify-between">
+        <button
+          onClick={() => navigate(-1)}
+          className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/80"
+          disabled={deletePostWithImageMutation.isPending}
+        >
+          ← Назад
+        </button>
+        {isAuthenticated && (
+          <>
+            <Link
+              to={`/edit/${post.id}`}
+              className="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-500"
+            >
+              Редагувати
+            </Link>
+            <button
+              onClick={() => handleDelete(post)}
+              className="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-500"
+              disabled={deletePostWithImageMutation.isPending}
+            >
+              Видалити
+            </button>
+          </>
+        )}
       </div>
     </article>
   );

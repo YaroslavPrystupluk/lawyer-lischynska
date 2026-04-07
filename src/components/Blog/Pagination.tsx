@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-interface Props {
+type PaginationProps = {
   currentPage: number;
   pageCount: number;
   visiblePages: number[];
@@ -11,7 +11,7 @@ interface Props {
   onGoTo: (p: number) => void;
 }
 
-export const Pagination: FC<Props> = ({
+export const Pagination: FC<PaginationProps> = ({
   currentPage,
   pageCount,
   visiblePages,

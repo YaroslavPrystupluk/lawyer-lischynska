@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from "react";
 
-interface Props {
+type ButtonFloatingActionProps = {
   handleOpenModal: () => void;
 }
 
-const ButtonFloatingAction: FC<Props> = ({ handleOpenModal }) => {
+const ButtonFloatingAction: FC<ButtonFloatingActionProps> = ({ handleOpenModal }) => {
   const [showText, setShowText] = useState(false);
 
   useEffect(() => {

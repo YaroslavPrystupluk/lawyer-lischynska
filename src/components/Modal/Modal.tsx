@@ -2,7 +2,7 @@
 import {FC, ReactNode, useEffect, useRef} from 'react';
 import {createPortal} from 'react-dom';
 
-interface modalProps {
+type modalProps = {
 	children: ReactNode;
     onClose: () => void;
     open: boolean;

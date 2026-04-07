@@ -3,7 +3,7 @@ import {IoCloseOutline} from "react-icons/io5";
 import ContactForm from "../../ContactForm/ContactForm.tsx";
 import ContactInfo from "../../ContactInfo/ContactInfo.tsx";
 
-interface FeedBackModalProps {
+type FeedBackModalProps = {
     handleCloseModal: () => void;
 }
 

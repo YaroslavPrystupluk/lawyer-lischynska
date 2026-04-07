@@ -17,11 +17,11 @@ import {
   fetchPostsPage,
   getTotalPostsCount,
   PageCursor,
-} from "../services/blogService";
-import type { IPost } from "../types/types";
+} from "../services/postsService.ts";
+import type { Post } from "../types/types";
 
 export const useBlogPagination = () => {
-  const [posts, setPosts] = useState<IPost[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
 

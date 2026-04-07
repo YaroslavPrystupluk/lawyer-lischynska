@@ -1,25 +1,20 @@
 import { FC } from "react";
-import { IPost } from "../../types/types.ts";
-import { generatePath, Link } from "react-router-dom";
-import { COMMON_ROUTES } from "../../routes/routes.name.ts";
+import { Post } from "../../types/types.ts";
+import { Link } from "react-router-dom";
 
-interface BlogPostProps {
-  post: IPost;
-}
+type BlogPostProps = {
+  post: Post;
+};
 
 const PostCard: FC<BlogPostProps> = ({ post }) => {
   return (
     <div className="flex flex-col bg-slate-100 border border-primary rounded-lg shadow-sm h-full">
-      <div className="w-full aspect-video">
-        <img
-          className="w-full h-full rounded-t-lg object-cover object-center"
-          src={post.img}
-          alt={post.title}
-        />
+      <div className="w-full h-52 bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-lg">
+        <img className="w-full object-cover" src={post.img} alt={post.title} />
       </div>
 
       <div className="p-5 flex flex-col flex-1">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-slate-900">
+        <h5 className="mb-2 text-xl font-bold text-slate-900 line-clamp-2">
           {post.title}
         </h5>
 
@@ -28,12 +23,12 @@ const PostCard: FC<BlogPostProps> = ({ post }) => {
         </p>
 
         <Link
-          to={generatePath(COMMON_ROUTES.POST, { id: String(post.id) })}
-          className="inline-flex items-center py-2 text-sm font-medium text-primary rounded-lg hover:text-primary/50 mt-auto"
+          to={`post/${post.id}`}
+          className="inline-flex items-center py-2 text-sm font-medium text-primary hover:text-primary/50 mt-auto"
         >
           Читати більше
           <svg
-            className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+            className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
