@@ -1,9 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { PostFormData } from "../../zod/validateSchemas";
+import { EditPostFormData, PostFormData } from "../../zod/validateSchemas";
 import Input from "../Input/Input";
 import TextArea from "../TextArea/TextArea";
 import { useNotifications } from "../../hooks/useNotifications";
+import { PostDto } from "../../types/types";
 
 type Props = {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => Promise<void>;
@@ -14,14 +15,25 @@ type Props = {
     >
   >;
   disabled: boolean;
+  initialValues?: PostDto;
 };
 
-const PostForm: FC<Props> = ({ handleSubmit, errors, setErrors, disabled }) => {
+const PostForm: FC<Props> = ({
+  handleSubmit,
+  errors,
+  setErrors,
+  disabled,
+  initialValues,
+}) => {
   const navigate = useNavigate();
-  const [preview, setPreview] = useState<string | null>(null);
+  const [preview, setPreview] = useState<string | null>(
+    initialValues?.img ?? null,
+  );
   const { showNotification } = useNotifications();
 
-  const clearFieldError = (field: keyof PostFormData) => {
+  const clearFieldError = (
+    field: keyof PostFormData | keyof EditPostFormData,
+  ) => {
     setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
@@ -88,14 +100,16 @@ const PostForm: FC<Props> = ({ handleSubmit, errors, setErrors, disabled }) => {
           name="title"
           type="text"
           onChange={() => clearFieldError("title")}
+          defaultValue={initialValues?.title}
           error={errors.title}
         />
         <TextArea
           label="Опис"
           id="description"
           name="description"
-          rows={5}
+          rows={15}
           onChange={() => clearFieldError("description")}
+          defaultValue={initialValues?.description}
           error={errors.description}
         />
         <select name="category">

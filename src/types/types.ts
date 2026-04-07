@@ -16,6 +16,13 @@ export type Post = {
   category: string;
 };
 
+export type PostDto = {
+  title: string;
+  description: string;
+  category: string;
+  img: string;
+};
+
 export type PostRequestDTO = Omit<Post, "img"> & {
   img: File;
 };

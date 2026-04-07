@@ -103,26 +103,42 @@ export const postsService = {
 
   editPostsWithImage: async (
     id: Post["id"],
-    post: Partial<Omit<Post, "id">> & {
+    post: Omit<Post, "id" | "img"> & {
       img: Blob | Uint8Array | ArrayBuffer;
+      imgType?: string;
     },
+    oldImgUrl?: string,
     newImage?: File,
   ) => {
     const postDoc = doc(collRef, id);
-    const deleteImgRef = ref(storage, post.img);
-    let imageUrl: string | undefined = undefined;
+    const { imgType, ...postData } = post; // витягуємо imgType окремо
 
-    if (newImage) {
-      if (post.img) await deleteObject(deleteImgRef);
+    if (!newImage) {
+      await updateDoc(postDoc, { ...postData, img: oldImgUrl });
+      return;
     }
+
     const imgRef = ref(
       storage,
       `${IMAGE_COLLECTION}/image-${Date.now()}-${id}`,
     );
-    await uploadBytes(imgRef, post.img);
-    imageUrl = await getDownloadURL(imgRef);
+    await uploadBytes(imgRef, post.img, {
+      contentType: imgType ?? "image/jpeg",
+    });
+    const imageUrl = await getDownloadURL(imgRef);
 
-    await updateDoc(postDoc, { ...post, img: imageUrl });
+    if (oldImgUrl) {
+      try {
+        const oldImgPath = decodeURIComponent(
+          oldImgUrl.split("/o/")[1].split("?")[0],
+        );
+        await deleteObject(ref(storage, oldImgPath));
+      } catch (e) {
+        console.error("delete error:", e);
+      }
+    }
+
+    await updateDoc(postDoc, { ...postData, img: imageUrl }); // зберігаємо без imgType
   },
 
   deletePostWithImage: async (

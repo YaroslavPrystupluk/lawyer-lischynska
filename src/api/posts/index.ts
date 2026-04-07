@@ -19,19 +19,17 @@ export const useCreatePostWithImage = () => {
   });
 };
 
-export const useEditPostWithImage = () => {
+export const useEditPostWithImage = (id: Post["id"]) => {
   return useMutation({
     mutationFn: ({
-      id,
       post,
+      oldImgUrl,
       newImg,
     }: {
-      id: Post["id"];
-      post: Omit<Post, "id"> & {
-        img: Blob | Uint8Array | ArrayBuffer;
-      };
+      post: Omit<Post, "id" | "img"> & { img: Blob | Uint8Array | ArrayBuffer };
+      oldImgUrl?: string;
       newImg?: File;
-    }) => postsService.editPostsWithImage(id, post, newImg),
+    }) => postsService.editPostsWithImage(id, post, oldImgUrl, newImg),
   });
 };
 

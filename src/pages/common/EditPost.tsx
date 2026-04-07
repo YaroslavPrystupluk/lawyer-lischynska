@@ -1,21 +1,27 @@
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
 import PostForm from "../../components/PostForm/PostForm";
 import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
-import { useEditPostWithImage } from "../../api/posts";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEditPostWithImage, useShowPost } from "../../api/posts";
 import { useAuth } from "../../hooks/useAuth";
 import { useNotifications } from "../../hooks/useNotifications";
 import { COMMON_ROUTES } from "../../routes/routes.name";
 import Spinner from "../../components/Spiner/Spinner";
-import { PostFormData, postFormSchema } from "../../zod/validateSchemas";
+import {
+  EditPostFormData,
+  editPostFormSchema,
+  PostFormData,
+} from "../../zod/validateSchemas";
+import { Post } from "../../types/types";
 
-const MAX_MB = 5 * 1024 * 1024;
-type FormErrors = Partial<Record<keyof PostFormData, string>>;
+type FormErrors = Partial<Record<keyof EditPostFormData, string>>;
 
 const EditPost: FC = () => {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: Post["id"] }>();
   const queryClient = useQueryClient();
-  const editPostWithImageMutation = useEditPostWithImage();
+  const editPostWithImageMutation = useEditPostWithImage(id ?? "");
+  const { data: existingPost } = useShowPost(id ?? "");
   const { user } = useAuth();
   const { showNotification } = useNotifications();
   const [errors, setErrors] = useState<FormErrors>({});
@@ -23,7 +29,7 @@ const EditPost: FC = () => {
   const handleSubmit = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-      if (!user) return;
+      if (!user || !existingPost) return;
 
       const form = e.currentTarget;
 
@@ -41,7 +47,7 @@ const EditPost: FC = () => {
           form.elements.namedItem("category") as HTMLSelectElement
         )?.value.trim() ?? "";
 
-      const validation = postFormSchema.safeParse({
+      const validation = editPostFormSchema.safeParse({
         title,
         description,
         category,
@@ -53,47 +59,56 @@ const EditPost: FC = () => {
           const field = issue.path[0] as keyof PostFormData;
           newErrors[field] = issue.message;
         });
-
         setErrors(newErrors);
         return;
       }
+      const fileBuffer = file ? await file.arrayBuffer() : undefined;
 
-      if (!file) {
-        showNotification("danger", "Поле є обов'язковим. Завантажте картинку");
-        return;
-      }
-      if (file?.size > MAX_MB) {
-        showNotification("danger", "Можна завантажувати зображення до 5Mb");
-        return;
-      }
-      if (!file?.type.startsWith("image/")) {
-        showNotification("danger", "Можна завантажувати лише зображення");
-        return;
-      }
       const payload = {
-        title,
-        description,
-        img: file,
-        userId: user.uid,
-        category,
+        post: {
+          title,
+          description,
+          img: fileBuffer ?? new ArrayBuffer(0), // або зроби img опціональним
+          imgType: file?.type,
+          userId: user.uid,
+          category,
+        },
+        oldImgUrl: existingPost?.img,
+        newImg: file,
       };
 
       await editPostWithImageMutation.mutateAsync(payload, {
         onSuccess: () => {
-          showNotification("success", "Пост успішно створений");
+          showNotification("success", "Пост успішно збережено");
           queryClient.invalidateQueries({ queryKey: ["posts"] });
           navigate(`/${COMMON_ROUTES.BLOG}`);
         },
         onError: (error) => {
           showNotification(
             "danger",
-            `Помилка створення поста || ${error.message}`,
+            `Помилка збереження поста || ${error.message}`,
           );
         },
       });
     },
-    [editPostWithImageMutation, navigate, queryClient, showNotification, user],
+    [
+      editPostWithImageMutation,
+      existingPost,
+      navigate,
+      queryClient,
+      showNotification,
+      user,
+    ],
   );
+  const initialValues = useMemo(() => {
+    if (!existingPost) return undefined;
+    return {
+      title: existingPost.title,
+      description: existingPost.description,
+      category: existingPost.category,
+      img: existingPost.img,
+    };
+  }, [existingPost]);
 
   if (editPostWithImageMutation.isPending) {
     return <Spinner />;
@@ -105,6 +120,7 @@ const EditPost: FC = () => {
       errors={errors}
       setErrors={setErrors}
       disabled={editPostWithImageMutation.isPending}
+      initialValues={initialValues}
     />
   );
 };
