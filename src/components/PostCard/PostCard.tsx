@@ -9,8 +9,12 @@ type BlogPostProps = {
 const PostCard: FC<BlogPostProps> = ({ post }) => {
   return (
     <div className="flex flex-col bg-slate-100 border border-primary rounded-lg shadow-sm h-full">
-      <div className="w-full h-52 bg-slate-200 flex items-center justify-center overflow-hidden rounded-t-lg">
-        <img className="w-full object-cover" src={post.img} alt={post.title} />
+      <div className="overflow-hidden  w-full h-64 bg-slate-200 flex items-center justify-center rounded-lg">
+        <img
+          className="max-w-full max-h-full object-contain"
+          src={post.img}
+          alt={post.title}
+        />
       </div>
 
       <div className="p-5 flex flex-col flex-1">
